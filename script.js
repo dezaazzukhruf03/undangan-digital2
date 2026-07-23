@@ -2,22 +2,16 @@
 // PRELOADER
 // ===============================
 
-window.addEventListener("load",function(){
+window.addEventListener("load", function () {
+  const preloader = document.getElementById("preloader");
 
-    const preloader=document.getElementById("preloader");
+  setTimeout(() => {
+    preloader.style.opacity = "0";
 
-    setTimeout(()=>{
-
-        preloader.style.opacity="0";
-
-        setTimeout(()=>{
-
-            preloader.style.display="none";
-
-        },800);
-
-    },1200);
-
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 800);
+  }, 1200);
 });
 
 const openBtn = document.getElementById("openInvitation");
@@ -29,27 +23,23 @@ const musicBtn = document.getElementById("musicBtn");
 music.volume = 0.5;
 
 openBtn.addEventListener("click", function () {
+  coverScreen.classList.add("fade-out");
 
-    coverScreen.classList.add("fade-out");
+  music.play();
 
-    music.play();
+  musicBtn.style.display = "flex";
 
-    musicBtn.style.display = "flex";
+  musicBtn.classList.add("playing");
 
-    musicBtn.classList.add("playing");
+  setTimeout(() => {
+    coverScreen.style.display = "none";
 
-    setTimeout(() => {
-
-        coverScreen.style.display = "none";
-
-        startAutoScroll();
-
-    }, 800);
-
+    startAutoScroll();
+  }, 800);
 });
 
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwrHji0oU0VPiLM7lhkhGMd53HvzZJplOXwqRYE-ox-z_f4rGo1FluF_EgG6mU6Bpc/exec";
+  "https://script.google.com/macros/s/AKfycbwAxVT9EEG6NPaC7PJ0B7XfzA9x_CsaSNmuoEgwmHNILlyAvhyv-Uo2ZS_SwK6cZsXh/exec";
 
 // ===============================
 // BUKA UNDANGAN
@@ -59,7 +49,7 @@ const SCRIPT_URL =
 // COUNTDOWN
 // ===============================
 
-const weddingDate = new Date("Oct 24, 2026 10:00:00").getTime();
+const weddingDate = new Date("Nov 01, 2026 10:00:00").getTime();
 
 const countdown = setInterval(() => {
   const now = new Date().getTime();
@@ -269,99 +259,85 @@ function createWishCard(item) {
     `;
 }
 
-    function updateStatistik(data) {
-      let hadir = 0;
-      let ragu = 0;
-      let tidak = 0;
+function updateStatistik(data) {
+  let hadir = 0;
+  let ragu = 0;
+  let tidak = 0;
 
-      data.forEach((item) => {
-        if (item.kehadiran === "Hadir") {
-          hadir++;
-        } else if (item.kehadiran === "Masih Ragu") {
-          ragu++;
-        } else {
-          tidak++;
-        }
-      });
-
-      document.getElementById("totalUcapan").innerText = data.length;
-      document.getElementById("totalHadir").innerText = hadir;
-      document.getElementById("totalRagu").innerText = ragu;
-      document.getElementById("totalTidakHadir").innerText = tidak;
+  data.forEach((item) => {
+    if (item.kehadiran === "Hadir") {
+      hadir++;
+    } else if (item.kehadiran === "Masih Ragu") {
+      ragu++;
+    } else {
+      tidak++;
     }
+  });
+
+  document.getElementById("totalUcapan").innerText = data.length;
+  document.getElementById("totalHadir").innerText = hadir;
+  document.getElementById("totalRagu").innerText = ragu;
+  document.getElementById("totalTidakHadir").innerText = tidak;
+}
 
 // ===============================
 // AMBIL UCAPAN
 // ===============================
 
 async function loadWishes() {
-
-    try{
-
-        wishList.innerHTML=`
+  try {
+    wishList.innerHTML = `
             <div class="wish-card">
                 Sedang memuat ucapan...
             </div>
         `;
 
-        const response = await fetch(SCRIPT_URL);
+    const response = await fetch(SCRIPT_URL);
 
-        const data = await response.json();
+    const data = await response.json();
 
-        console.log(data);
+    console.log(data);
 
-        wishList.innerHTML="";
+    wishList.innerHTML = "";
 
-        updateStatistik(data);
+    updateStatistik(data);
 
-        data.reverse();
+    data.reverse();
 
-const totalUcapan = data.length;
+    const totalUcapan = data.length;
 
-const terbaru = data.slice(0, 3);
+    const terbaru = data.slice(0, 3);
 
-terbaru.forEach(item => {
+    terbaru.forEach((item) => {
+      wishList.innerHTML += createWishCard(item);
+    });
 
-    wishList.innerHTML += createWishCard(item);
-
-});
-
-if (totalUcapan > 3) {
-
-    wishList.innerHTML += `
+    if (totalUcapan > 3) {
+      wishList.innerHTML += `
         <button id="showAllWish" class="show-more-btn">
             Lihat Semua Ucapan (${totalUcapan})
         </button>
     `;
 
-    document
+      document
         .getElementById("showAllWish")
         .addEventListener("click", function () {
+          wishList.innerHTML = "";
 
-            wishList.innerHTML = "";
-
-            data.forEach(item => {
-
-                wishList.innerHTML += createWishCard(item);
-
-            });
-
+          data.forEach((item) => {
+            wishList.innerHTML += createWishCard(item);
+          });
         });
+    }
+  } catch (error) {
+    console.log(error);
 
-}
-
-    }catch(error){
-
-        console.log(error);
-
-        wishList.innerHTML=`
+    wishList.innerHTML = `
             <div class="wish-card">
                 Gagal memuat ucapan.
             </div>
         `;
-
-    }
-
+  }
 }
 
 loadWishes();
@@ -411,53 +387,37 @@ wishForm.addEventListener("submit", async function (e) {
   loading.style.display = "none";
 });
 
-const sections=document.querySelectorAll("section[id]");
-const navLinks=document.querySelectorAll(".bottom-nav a");
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".bottom-nav a");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
+  let current = "";
 
-    let current="";
+  sections.forEach((section) => {
+    const top = section.offsetTop - 120;
 
-    sections.forEach(section=>{
+    if (window.scrollY >= top) {
+      current = section.getAttribute("id");
+    }
+  });
 
-        const top=section.offsetTop-120;
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
 
-        if(window.scrollY>=top){
-
-            current=section.getAttribute("id");
-
-        }
-
-    });
-
-    navLinks.forEach(link=>{
-
-        link.classList.remove("active");
-
-        if(link.getAttribute("href")==="#"+current){
-
-            link.classList.add("active");
-
-        }
-
-    });
-
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
 });
 
-musicBtn.addEventListener("click",function(){
+musicBtn.addEventListener("click", function () {
+  if (music.paused) {
+    music.play();
 
-    if(music.paused){
+    musicBtn.classList.add("playing");
+  } else {
+    music.pause();
 
-        music.play();
-
-        musicBtn.classList.add("playing");
-
-    }else{
-
-        music.pause();
-
-        musicBtn.classList.remove("playing");
-
-    }
-
+    musicBtn.classList.remove("playing");
+  }
 });
