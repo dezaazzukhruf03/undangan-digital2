@@ -36,15 +36,16 @@ music.volume = 0.5;
 openBtn.addEventListener("click", function () {
   coverScreen.classList.add("fade-out");
 
-  music.play();
+  music.play().catch((err) => {
+    console.log("Autoplay diblokir:", err);
+    musicBtn.classList.remove("playing");
+  });
 
   musicBtn.style.display = "flex";
-
   musicBtn.classList.add("playing");
 
   setTimeout(() => {
     coverScreen.style.display = "none";
-
     startAutoScroll();
   }, 800);
 });
@@ -60,11 +61,17 @@ const SCRIPT_URL =
 // COUNTDOWN
 // ===============================
 
-const weddingDate = new Date("Nov 01, 2026 10:00:00").getTime();
+const weddingDate = new Date("Nov 01, 2026 09:00:00").getTime();
 
 const countdown = setInterval(() => {
   const now = new Date().getTime();
   const distance = weddingDate - now;
+
+  if (distance < 0) {
+  clearInterval(countdown);
+  document.querySelector(".mini-countdown").innerHTML =
+    '<p style="color:var(--gold-dark);font-weight:600;">Hari bahagia telah tiba! 🎉</p>';
+}
 
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
@@ -85,6 +92,27 @@ const countdown = setInterval(() => {
     clearInterval(countdown);
   }
 }, 1000);
+
+// ===============================
+// ADD TO CALENDAR
+// ===============================
+
+const calendarBtn = document.getElementById("addToCalendar");
+
+if (calendarBtn) {
+  const startDate = "20261101T090000";
+  const endDate = "20261101T120000"; // sesuaikan estimasi jam selesai acara
+
+  const calendarUrl =
+    "https://www.google.com/calendar/render?action=TEMPLATE" +
+    "&text=" + encodeURIComponent("Resepsi Pernikahan Deza & Lara") +
+    "&dates=" + startDate + "/" + endDate +
+    "&details=" + encodeURIComponent("Resepsi pernikahan Deza & Lara") +
+    "&location=" + encodeURIComponent("Cengkeh Nan XX, Kec. Lubuk Begalung, Kota Padang") +
+    "&ctz=Asia/Jakarta";
+
+  calendarBtn.href = calendarUrl;
+}
 
 // ===============================
 // COPY REKENING
