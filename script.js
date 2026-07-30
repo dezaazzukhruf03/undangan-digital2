@@ -2,6 +2,17 @@
 // PRELOADER
 // ===============================
 
+function escapeHTML(str) {
+  if (!str) return "";
+  return str.replace(/[&<>"']/g, (match) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  }[match]));
+}
+
 window.addEventListener("load", function () {
   const preloader = document.getElementById("preloader");
 
@@ -100,7 +111,7 @@ const guestBox = document.querySelector(".guest-box");
 const guestName = document.getElementById("guestName");
 
 if (guest) {
-  guestName.innerHTML = guest.replace(/~/g, "<br>");
+  guestName.innerHTML = escapeHTML(guest).replace(/~/g, "<br>");
 } else {
   guestBox.classList.add("hidden");
 }
@@ -219,43 +230,24 @@ function createWishCard(item) {
   const status = getStatus(item.kehadiran);
 
   return `
-
     <div class="wish-card">
-
         <div class="wish-header">
-
             <div class="wish-name">
-
                 <i class="fa-solid fa-user"></i>
-
-                ${item.nama}
-
+                ${escapeHTML(item.nama)}
             </div>
-
             <div class="wish-status ${status.class}">
-
                 ${status.text}
-
             </div>
-
         </div>
-
         <div class="wish-message">
-
-            ${item.ucapan}
-
+            ${escapeHTML(item.ucapan)}
         </div>
-
         <div class="wish-date">
-
             <i class="fa-regular fa-clock"></i>
-
             ${formatTanggal(item.waktu)}
-
         </div>
-
     </div>
-
     `;
 }
 
