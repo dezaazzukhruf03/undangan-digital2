@@ -441,3 +441,15 @@ musicBtn.addEventListener("click", function () {
     musicBtn.classList.remove("playing");
   }
 });
+
+const petalContainer = document.getElementById("petals");
+
+for (let i = 0; i < 15; i++) {
+  const petal = document.createElement("div");
+  petal.className = "petal";
+  petal.style.left = Math.random() * 100 + "%";
+  petal.style.animationDuration = 8 + Math.random() * 6 + "s";
+  petal.style.animationDelay = Math.random() * 8 + "s";
+  petal.style.width = petal.style.height = 6 + Math.random() * 6 + "px";
+  petalContainer.appendChild(petal);
+}

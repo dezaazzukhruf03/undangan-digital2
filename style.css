@@ -538,10 +538,17 @@ button:hover {
   margin-top: 10px;
   padding: 12px 24px;
   border-radius: 40px;
-  background: linear-gradient(to right, var(--gold-dark), var(--gold));
-  color: #fff;
+  background: var(--maroon);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
   font-size: 14px;
   font-weight: 600;
+  transition: var(--transition);
+}
+
+.add-calendar-btn:hover {
+  background: var(--maroon-dark);
+  transform: translateY(-2px);
 }
 
 .location-card {
@@ -646,32 +653,19 @@ button:hover {
 
 .copy-icon {
   position: absolute;
-
   top: -54px;
-
   right: 0px;
-
   width: 25px;
-
   height: 30px;
-
-  border: none;
-
+  border: 1px solid var(--gold);
   border-radius: 12px;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
-  background: linear-gradient(135deg, #b9851c, #d6aa45);
-
+  background: var(--maroon);
   cursor: pointer;
-
   transition: 0.3s;
-
-  box-shadow: 0 6px 15px rgba(185, 133, 28, 0.25);
+  box-shadow: 0 6px 15px rgba(74, 13, 22, 0.25);
 }
 
 .rekening-card, .wish-card, .stat-card {
@@ -1286,4 +1280,62 @@ button:hover {
   height: 2px;
   background: var(--gold);
   margin: 12px auto 0;
+}
+
+.section, .hero {
+  position: relative;
+}
+
+.container {
+  position: relative;
+}
+
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  background-repeat: repeat-y;
+  background-size: 22px 150px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container::before {
+  left: 2px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 150'%3E%3Cpath d='M11,0 Q0,25 11,50 Q22,75 11,100 Q0,125 11,150' fill='none' stroke='%23c89b3c' stroke-width='1.2'/%3E%3Ccircle cx='11' cy='0' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='50' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='100' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='150' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='0' cy='25' r='1.6' fill='%23c89b3c'/%3E%3Ccircle cx='22' cy='75' r='1.6' fill='%23c89b3c'/%3E%3Ccircle cx='0' cy='125' r='1.6' fill='%23c89b3c'/%3E%3C/svg%3E");
+}
+
+.container::after {
+  right: 2px;
+  transform: scaleX(-1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 150'%3E%3Cpath d='M11,0 Q0,25 11,50 Q22,75 11,100 Q0,125 11,150' fill='none' stroke='%23c89b3c' stroke-width='1.2'/%3E%3Ccircle cx='11' cy='0' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='50' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='100' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='11' cy='150' r='2.5' fill='%23c89b3c'/%3E%3Ccircle cx='0' cy='25' r='1.6' fill='%23c89b3c'/%3E%3Ccircle cx='22' cy='75' r='1.6' fill='%23c89b3c'/%3E%3Ccircle cx='0' cy='125' r='1.6' fill='%23c89b3c'/%3E%3C/svg%3E");
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 0 50% 50% 50%;
+  opacity: 0.6;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
 }
