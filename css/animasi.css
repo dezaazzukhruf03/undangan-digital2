@@ -51,7 +51,17 @@
   }
 }
 
-/* Floating animation untuk elemen tertentu */
+/* Fade Up saat section masuk viewport (dikontrol lewat script.js + class .in-view) */
+.fade-up-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up-section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
 .floating {
   animation: float 3s ease-in-out infinite;
 }

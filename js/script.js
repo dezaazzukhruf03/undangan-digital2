@@ -3,7 +3,54 @@
    ========================================== */
 
 document.addEventListener('DOMContentLoaded', function () {
-  
+
+  // ------------------------------------------
+  // 0. FADE UP SECTION SAAT MASUK VIEWPORT
+  // ------------------------------------------
+  const fadeSections = document.querySelectorAll('.fade-up-section');
+
+  if ('IntersectionObserver' in window && fadeSections.length) {
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    fadeSections.forEach(section => fadeObserver.observe(section));
+  } else {
+    // Browser lama tanpa IntersectionObserver: langsung tampilkan semua
+    fadeSections.forEach(section => section.classList.add('in-view'));
+  }
+
+  // ------------------------------------------
+  // 0b. AUTO SCROLL PERLAHAN (dipakai saat "Buka Undangan" diklik)
+  // ------------------------------------------
+  function smoothAutoScroll(targetY, duration) {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    const startTime = performance.now();
+
+    function step(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeInOutQuad
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress;
+
+      window.scrollTo(0, startY + distance * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
   // ------------------------------------------
   // 1. URL PARAMETER CHECKER (?to=NamaTamu)
   // ------------------------------------------
@@ -53,6 +100,15 @@ document.addEventListener('DOMContentLoaded', function () {
       // Memutar musik (fungsi dari music.js)
       if (typeof playAudio === 'function') {
         playAudio();
+      }
+
+      // 4. Auto-scroll perlahan dari Beranda sampai akhir section Wedding Gift
+      const giftSection = document.getElementById('gift');
+      if (giftSection) {
+        const targetY = giftSection.offsetTop + giftSection.offsetHeight - window.innerHeight;
+        setTimeout(() => {
+          smoothAutoScroll(Math.max(targetY, 0), 6000);
+        }, 400);
       }
     });
   }
