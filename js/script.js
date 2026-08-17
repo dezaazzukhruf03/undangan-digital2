@@ -29,11 +29,41 @@ document.addEventListener('DOMContentLoaded', function () {
   // 0b. AUTO SCROLL PERLAHAN (dipakai saat "Buka Undangan" diklik)
   // ------------------------------------------
   function smoothAutoScroll(targetY, duration) {
+    const htmlEl = document.documentElement;
+    const previousScrollBehavior = htmlEl.style.scrollBehavior;
+
+    // Matikan scroll-behavior:smooth CSS sementara, supaya tidak
+    // bentrok/rebutan kontrol dengan animasi custom (requestAnimationFrame) ini.
+    htmlEl.style.scrollBehavior = 'auto';
+
     const startY = window.scrollY;
     const distance = targetY - startY;
     const startTime = performance.now();
+    let cancelled = false;
+
+    function restoreScrollBehavior() {
+      htmlEl.style.scrollBehavior = previousScrollBehavior;
+    }
+
+    function stopAutoScroll() {
+      if (cancelled) return;
+      cancelled = true;
+      restoreScrollBehavior();
+      window.removeEventListener('wheel', stopAutoScroll);
+      window.removeEventListener('touchstart', stopAutoScroll);
+      window.removeEventListener('pointerdown', stopAutoScroll);
+      window.removeEventListener('keydown', stopAutoScroll);
+    }
+
+    // Auto-scroll langsung berhenti begitu tamu menyentuh/scroll layar sendiri
+    window.addEventListener('wheel', stopAutoScroll, { passive: true });
+    window.addEventListener('touchstart', stopAutoScroll, { passive: true });
+    window.addEventListener('pointerdown', stopAutoScroll, { passive: true });
+    window.addEventListener('keydown', stopAutoScroll);
 
     function step(now) {
+      if (cancelled) return;
+
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       // easeInOutQuad
@@ -45,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (progress < 1) {
         requestAnimationFrame(step);
+      } else {
+        stopAutoScroll();
       }
     }
 
@@ -107,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (giftSection) {
         const targetY = giftSection.offsetTop + giftSection.offsetHeight - window.innerHeight;
         setTimeout(() => {
-          smoothAutoScroll(Math.max(targetY, 0), 6000);
+          smoothAutoScroll(Math.max(targetY, 0), 9000);
         }, 400);
       }
     });

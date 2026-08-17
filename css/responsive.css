@@ -83,4 +83,9 @@
   .rsvp-stats {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .section-side-flower {
+    width: 48px;
+    opacity: 0.45;
+  }
 }
