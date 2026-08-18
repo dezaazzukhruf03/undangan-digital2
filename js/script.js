@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const targetY = giftSection.offsetTop + giftSection.offsetHeight - window.innerHeight;
         setTimeout(() => {
           smoothAutoScroll(Math.max(targetY, 0), 90000);
-        }, 1000);
+        }, 500);
       }
     });
   }
