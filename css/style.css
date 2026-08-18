@@ -186,7 +186,7 @@ body.no-scroll {
   transform: translateY(-50%);
   width: 130px;
   height: auto;
-  opacity: 0.8;
+  opacity: 0.7;
   pointer-events: none;
   overflow: visible;
 }
@@ -486,6 +486,7 @@ body.no-scroll {
 .groom-card, .bride-card {
   width: 100%;
   max-width: 300px;
+  min-width: 0;
 }
 
 .photo-frame {
@@ -669,11 +670,11 @@ body.no-scroll {
 }
 
 #acara .section-side-flower-left {
-  top: 15%;
+  top: 13%;
 }
 
 #acara .section-side-flower-right {
-  top: 15%;
+  top: 13%;
 }
 
 /* ==========================================
@@ -844,11 +845,11 @@ body.no-scroll {
 }
 
 #gift .section-side-flower-left {
-  top: 95%;
+  top: 35%;
 }
 
 #gift .section-side-flower-right {
-  top: 95%;
+  top: 35%;
 }
 
 /* ==========================================
