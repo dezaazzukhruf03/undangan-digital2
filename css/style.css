@@ -147,15 +147,27 @@ body.no-scroll {
   margin-bottom: 200px;
 }
 
+.beranda-photo-wrap {
+  position: relative;
+  width: 200px;
+  margin: 0 auto 20px;
+}
+
 .beranda-photo {
   width: 200px;
   height: 300px;
-  margin: 0 auto 20px;
+  margin: 0;
   border-radius: 100px 100px 20px 20px;
   overflow: hidden;
   box-shadow: var(--shadow);
   border: 4px solid var(--white);
   position: relative;
+}
+
+.beranda-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .beranda-photo-flower {
@@ -168,10 +180,32 @@ body.no-scroll {
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
 }
 
-.beranda-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.beranda-photo-side-flower {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 130px;
+  height: auto;
+  opacity: 0.8;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.beranda-photo-side-flower-top {
+  top: 70%;
+}
+
+.beranda-photo-side-flower-bottom {
+  top: 70%;
+}
+
+.beranda-photo-side-flower-left {
+  left: -90px;
+}
+
+.beranda-photo-side-flower-right {
+  right: -90px;
+  transform: translateY(-50%) scaleX(-1);
 }
 
 .title-primary {
@@ -327,7 +361,7 @@ body.no-scroll {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 72px;
+  width: 150px;
   height: auto;
   opacity: 0.55;
   pointer-events: none;
@@ -335,11 +369,11 @@ body.no-scroll {
 }
 
 .section-side-flower-left {
-  left: -16px;
+  left: -10px;
 }
 
 .section-side-flower-right {
-  right: -16px;
+  right: -10px;
   transform: translateY(-50%) scaleX(-1);
 }
 
@@ -487,6 +521,14 @@ body.no-scroll {
   color: var(--primary);
 }
 
+#mempelai .section-side-flower-left {
+  top: 65%;
+}
+
+#mempelai .section-side-flower-right {
+  top: 65%;
+}
+
 /* ==========================================
    LOVE STORY (TIMELINE)
    ========================================== */
@@ -550,6 +592,14 @@ body.no-scroll {
 .timeline-content p {
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+#story .section-side-flower-left {
+  top: 20%;
+}
+
+#story .section-side-flower-right {
+  top: 20%;
 }
 
 /* ==========================================
@@ -616,6 +666,14 @@ body.no-scroll {
 
 .btn-primary:hover {
   background-color: var(--primary-dark);
+}
+
+#acara .section-side-flower-left {
+  top: 15%;
+}
+
+#acara .section-side-flower-right {
+  top: 15%;
 }
 
 /* ==========================================
@@ -690,6 +748,14 @@ body.no-scroll {
 
 .lightbox-prev { left: 24px; }
 .lightbox-next { right: 24px; }
+
+#galeri .section-side-flower-left {
+  top: 55%;
+}
+
+#galeri .section-side-flower-right {
+  top: 55%;
+}
 
 /* ==========================================
    WEDDING GIFT (KARTU ATM)
@@ -775,6 +841,14 @@ body.no-scroll {
   background: var(--white);
   color: var(--primary);
   border-color: var(--white);
+}
+
+#gift .section-side-flower-left {
+  top: 95%;
+}
+
+#gift .section-side-flower-right {
+  top: 95%;
 }
 
 /* ==========================================
@@ -942,6 +1016,14 @@ body.no-scroll {
 .wish-text {
   font-size: 0.9rem;
   color: var(--text-muted);
+}
+
+#rsvp .section-side-flower-left {
+  top: 12%;
+}
+
+#rsvp .section-side-flower-right {
+  top: 12%;
 }
 
 /* ==========================================

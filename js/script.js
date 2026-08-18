@@ -139,8 +139,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (giftSection) {
         const targetY = giftSection.offsetTop + giftSection.offsetHeight - window.innerHeight;
         setTimeout(() => {
-          smoothAutoScroll(Math.max(targetY, 0), 9000);
-        }, 400);
+          smoothAutoScroll(Math.max(targetY, 0), 90000);
+        }, 1000);
       }
     });
   }
