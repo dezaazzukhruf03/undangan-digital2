@@ -1,86 +1,101 @@
-/* ==========================================
-   RESPONSIVE DESIGN (MEDIA QUERIES)
-   ========================================== */
+/* ==========================================================================
+   RESPONSIVE.CSS - Breakpoint Tweaks for Screen Sizes
+   Note: High focus on strictly keeping card proportions inside .mobile-wrapper
+   ========================================================================== */
 
-/* Tablet & Mobile (Max Width: 768px) */
-@media screen and (max-width: 768px) {
+/* Very Small Mobile Screens (< 360px) */
+@media screen and (max-width: 360px) {
+    .bride-groom-title {
+        font-size: 3rem;
+    }
+    
+    .section-title-script {
+        font-size: 2.8rem;
+    }
 
-  /* Restrukturisasi Navigasi Samping menjadi Floating Bottom Navigation */
-  .side-nav {
-    top: auto;
-    bottom: 20px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    padding: 8px 16px;
-    border-radius: 30px;
-    width: max-content;
-    position: fixed;
-    flex-direction: row;
-    gap: 10px;
-  }
+    .countdown-item {
+        max-width: 62px;
+    }
 
-  .side-nav ul {
-    flex-direction: row;
-    gap: 12px;
-    padding-top: 0;
-    padding-left: 12px;
-    border-top: none;
-    border-left: 1px solid rgba(194, 89, 91, 0.15);
-  }
+    .countdown-item span {
+        font-size: 1.1rem;
+    }
 
-  .side-nav a {
-    width: 34px;
-    height: 34px;
-    font-size: 0.95rem;
-  }
+    .nav-pill {
+        gap: 10px;
+        padding: 6px 12px;
+    }
 
-  .side-nav .music-toggle-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 1rem;
-  }
+    .nav-item {
+        font-size: 0.95rem;
+    }
 
-  /* Adjust Countdown Size */
-  .countdown-wrapper {
-    gap: 8px;
-  }
+    .cover-oval-card {
+        width: 92%;
+        min-height: 420px;
+        border-radius: 120px;
+    }
 
-  .countdown-item {
-    min-width: 60px;
-    padding: 10px;
-  }
+    .cover-oval-text {
+        padding: 60px 18px 36px;
+    }
 
-  .countdown-item span {
-    font-size: 1.4rem;
-  }
+    .section-photo-decor {
+        width: 56px;
+        height: 76px;
+    }
 
-  /* Kartu ATM Mobile */
-  .atm-card {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .couple-name {
-    font-size: 2.3rem;
-  }
-
-  .section-title {
-    font-size: 1.8rem;
-  }
+    .couple-grid {
+        gap: 10px;
+    }
 }
 
-/* Small Mobile (Max Width: 480px) */
-@media screen and (max-width: 480px) {
-  .section {
-    padding: 60px 16px;
-  }
+/* Landscape mode or Tablet/Desktop wrapper styling */
+@media screen and (min-width: 451px) {
+    :root {
+        /* Satu sumber angka jarak kanan, dipakai semua elemen di bawah,
+           supaya tidak mungkin ada yang "meleset" beda angka */
+        --desktop-gutter: 0px;
+    }
 
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    body {
+        background-color: #0b1329;
+        /* Sebelumnya "center" — sekarang kartu HP digeser ke kanan layar laptop */
+        justify-content: flex-end;
+        padding-right: 0;
+    }
 
-  .rsvp-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    /* margin:0 auto pada .mobile-wrapper (di style.css) membuatnya tetap
+       "auto-center" walau parent flex sudah diset flex-end, jadi di-reset
+       di sini supaya benar-benar nempel kanan dengan jarak --desktop-gutter */
+    .mobile-wrapper {
+        margin: 0 var(--desktop-gutter) 0 0;
+    }
+
+    /* Elemen position:fixed di bawah ini posisinya relatif ke VIEWPORT,
+       bukan ke .mobile-wrapper, jadi harus disamakan manual pakai variabel
+       yang sama supaya tetap pas menutupi .mobile-wrapper yang digeser kanan */
+    .cover-screen {
+        left: auto;
+        right: var(--desktop-gutter);
+        transform: none;
+    }
+
+    .cover-screen.opened {
+        transform: translateY(-100%);
+    }
+
+    .floating-nav {
+        left: auto;
+        right: var(--desktop-gutter);
+        transform: none;
+    }
+
+    .floating-nav.hide-nav {
+        transform: translateY(20px);
+    }
+
+    .music-floating-container {
+        right: calc(var(--desktop-gutter) + 15px);
+    }
 }

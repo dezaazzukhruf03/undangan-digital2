@@ -1,385 +1,544 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Wedding of Deza & Lara - Softred 001</title>
-  
-  <!-- Google Fonts & Font Awesome Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Undangan Pernikahan Deza&Lara</title>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animasi.css">
-  <link rel="stylesheet" href="css/responsive.css">
+    <!-- SEO & Social Share Preview -->
+    <meta name="description" content="Dengan penuh sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan Deza & Lara pada Minggu, 01 November 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Undangan Pernikahan Deza & Lara">
+    <meta property="og:description" content="Minggu, 01 November 2026 — Tanpa mengurangi rasa hormat, kami mengundang Anda untuk berbagi kebahagiaan di hari pernikahan kami.">
+    <meta property="og:image" content="assets/images/cover.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#800000">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22> ❤️ </text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-  <!-- TAMBAHKAN WADAH PRAMA INI -->
-  <div class="mobile-wrapper">
+<body class="no-scroll">
 
-  <!-- 1. PRELOADER -->
+    <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-content">
-      <p class="loading-text">Loading<span class="loading-dots">...</span></p>
+      <img src="assets/images/logo.png" alt="Logo" class="preloader-logo">
+      <p class="loading-text blink-text">Sedang memuat<span class="loading-dots">...</span></p>
       <div class="browser-notice">
         <i class="fa-brands fa-chrome"></i>
-        <span>Untuk tampilan terbaik, gunakan <strong>Google Chrome</strong></span>
+        <span>Untuk tampilan terbaik gunakan <br> <strong>Google Chrome</strong></span>
       </div>
     </div>
   </div>
 
-  <!-- AUDIO CONTROL (Music Player) -->
-  <audio id="bg-music" loop>
-    <source src="assets/audio/anugrah-terindah.m4a" type="audio/mpeg">
-    Browser Anda tidak mendukung elemen audio.
-  </audio>
+    <!-- Mobile Wrapper (HP Card Style) -->
+    <div class="mobile-wrapper">
 
-  <!-- FLOATING SIDE NAVIGATION (termasuk tombol musik) -->
-  <nav id="side-nav" class="side-nav hidden">
-    <button id="music-btn" class="music-toggle-btn" title="Putar/Jeda Musik">
-      <i class="fa-solid fa-compact-disc fa-spin"></i>
-    </button>
-    <ul>
-      <li><a href="#beranda" class="nav-link active" title="Beranda"><i class="fa-solid fa-house"></i></a></li>
-      <li><a href="#mempelai" class="nav-link" title="Mempelai"><i class="fa-solid fa-heart"></i></a></li>
-      <li><a href="#story" class="nav-link" title="Love Story"><i class="fa-solid fa-book-open"></i></a></li>
-      <li><a href="#acara" class="nav-link" title="Acara"><i class="fa-solid fa-calendar-days"></i></a></li>
-      <li><a href="#galeri" class="nav-link" title="Galeri"><i class="fa-solid fa-images"></i></a></li>
-      <li><a href="#gift" class="nav-link" title="Hadiah"><i class="fa-solid fa-gift"></i></a></li>
-      <li><a href="#rsvp" class="nav-link" title="RSVP"><i class="fa-solid fa-pen-to-square"></i></a></li>
-    </ul>
-  </nav>
+        <!-- Cover Screen / Lock Screen (Full screen cover.png background) -->
+        <div id="cover-screen" class="cover-screen">
+            <!-- Motif kiri & kanan SENGAJA di luar stage (tidak ikut scale) —
+                 supaya selalu nempel pas di pinggir layar ASLI di semua HP,
+                 nggak kena celah letterbox saat kanvas di-scale berdasarkan tinggi -->
+            <img class="cover-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="cover-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="cover-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="cover-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
 
-<!-- 2. COVER SCREEN (Lock Screen) -->
-<section id="cover-screen">
-  <!-- Nilai rgba diturunkan agar foto cover lebih terang (0.2 & 0.3) -->
-  <div class="cover-bg" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), url('assets/images/cover.webp');"></div>
-  
-  <div class="cover-content">
-    <p class="subtitle">The Wedding of</p>
-    <h1 class="couple-name">Deza & Lara</h1>
-    <p class="wedding-date">Minggu, 01 November 2026</p>
-    
-    <div id="guest-container" class="guest-box hidden">
-      <p>Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-      <h3 id="guest-name">-</h3>
+            <!-- STAGE: kanvas tetap 393x852, discale utuh via CSS supaya posisi
+                 semua dekorasi & teks di dalamnya SELALU sama persis di semua HP -->
+            <div class="cover-content">
+                <div class="cover-bg"></div>
+                <div class="cover-overlay"></div>
+
+                <!-- Gambar dekorasi atas -->
+                <img class="cover-edge-atas" src="assets/images/atas.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                <!-- Kelapa -->
+                <img class="cover-edge-kelapa" src="assets/images/kelapa.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                <!-- Pohon1 -->
+                <img class="cover-edge-pohon1-right" src="assets/images/pohon1.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                 <!-- Ranting1 -->
+                <img class="cover-edge-ranting1" src="assets/images/ranting1.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                <!-- Rumah Adat -->
+                <img class="cover-edge-rumah-adat" src="assets/images/rumah-adat3.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                <!-- Jam Gadang -->
+                <img class="cover-edge-jam-gadang" src="assets/images/jam-gadang.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
+                    <div class="cover-oval-text">
+                        <p class="sub-title fade-in-up">THE WEDDING OF</p>
+                        <h1 class="bride-groom-title fade-in-up">Deza <br> &amp; <br> Lara</h1>
+                        <p class="wedding-date fade-in-up">Minggu, 01 November 2026</p>
+
+                        <!-- Guest Box (Only displayed when ?to= query parameter is present) -->
+                        <div id="guest-box" class="guest-box fade-in-up hide-guest-box">
+                            <p class="guest-label">Kepada Yth. :</p>
+                            <h3 id="guest-name" class="guest-name"></h3>
+                            <p class="guest-note">*Mohon maaf bila ada kesalahan penulisan nama/gelar</p>
+                        </div>
+
+                        <button id="btn-open-invitation" class="btn-open pulse">
+                            <i class="fa-solid fa-envelope-open"></i> Buka Undangan
+                        </button>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Music Toggle Floating Button (Separate from navbar pill, slightly above right) -->
+        <div id="music-wrapper" class="music-floating-container hide-nav">
+            <button id="music-toggle" class="music-floating-btn" aria-label="Toggle Music">
+                <i class="fa-solid fa-compact-disc"></i>
+            </button>
+        </div>
+
+        <!-- Floating Navigation -->
+        <nav id="floating-nav" class="floating-nav hide-nav">
+            <div class="nav-pill">
+                <button id="btn-auto-scroll" class="nav-item auto-scroll-btn" title="Auto Scroll" aria-label="Auto Scroll">
+                    <span id="auto-scroll-notice" class="auto-scroll-notice">Auto Scroll <br> Aktif</span>
+                    <i class="fa-solid fa-angles-down"></i>
+                </button>
+                <a href="#beranda" class="nav-item active" title="Beranda" aria-label="Beranda"><i class="fa-solid fa-house"></i></a>
+                <a href="#mempelai" class="nav-item" title="Mempelai" aria-label="Mempelai"><i class="fa-solid fa-heart"></i></a>
+                <a href="#story" class="nav-item" title="Kisah Cinta Kami" aria-label="Kisah Cinta Kami"><i class="fa-solid fa-book-bookmark"></i></a>
+                <a href="#acara" class="nav-item" title="Acara" aria-label="Acara"><i class="fa-solid fa-calendar-check"></i></a>
+                <a href="#galeri" class="nav-item" title="Galeri" aria-label="Galeri"><i class="fa-solid fa-images"></i></a>
+                <a href="#gift" class="nav-item" title="Hadiah" aria-label="Hadiah"><i class="fa-solid fa-gift"></i></a>
+                <a href="#ucapan" class="nav-item" title="RSVP" aria-label="RSVP"><i class="fa-solid fa-comment-dots"></i></a>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Section 1: Beranda -->
+        <section id="beranda" class="section hero-section">
+            <!-- STAGE: kanvas tetap 393x852, discale utuh via CSS -->
+            <!-- Motif kiri & kanan khusus Beranda (terpisah dari cover-screen,
+                 supaya bisa diatur sendiri-sendiri) — di luar stage juga -->
+            <img class="beranda-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="beranda-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="beranda-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="beranda-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <div class="hero-stage">
+                <!-- Full Screen Cover Photo -->
+                <div class="hero-bg"></div>
+                <div class="hero-overlay"></div>
+                <!-- Gambar dekorasi atas -->
+            <img class="beranda-edge-atas" src="assets/images/atas.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Kelapa -->
+            <img class="beranda-edge-kelapa" src="assets/images/kelapa.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Pohon1 -->
+            <img class="beranda-edge-pohon1-right" src="assets/images/pohon1.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+             <!-- Ranting1 -->
+            <img class="beranda-edge-ranting1" src="assets/images/ranting1.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Rumah Adat -->
+            <img class="beranda-edge-rumah-adat" src="assets/images/rumah-adat3.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Jam Gadang -->
+            <img class="beranda-edge-jam-gadang" src="assets/images/jam-gadang.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
+                    <div class="foto-utama">
+            <div class="photo-frame">
+                <img src="assets/images/foto-utama.png" alt="Foto Lara & Deza">
+            </div>
+            <h1 class="bride-groom-text-beranda">Lara Sagita <br> &amp; <br> Deza Azzukhruf</h1>
+        </div>
+            </div>
+        </section>
+
+<!-- Section 2: Mempelai -->
+<section id="mempelai" class="section mempelai-section">
+    <!-- Kutipan Ayat -->
+    <div class="quran-quote text-center">
+        <i class="fa-solid fa-quote-left quote-icon"></i>
+        <p class="ar-text">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً</p>
+        <p class="quote-translation">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."</p>
+        <span class="quote-source">(QS. Ar-Rum: 21)</span>
     </div>
 
-    <button id="btn-open-invitation" class="btn-open">
-      <i class="fa-solid fa-envelope-open"></i> Buka Undangan
-    </button>
-  </div>
+    <!-- Header Section -->
+    <div class="section-header text-center">
+        <h2 class="section-title">Pasangan Mempelai</h2>
+        <p class="section-subtitle">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan kami:</p>
+    </div>
+
+    <!-- Grid Mempelai -->
+    <div class="couple-grid">
+        <!-- Mempelai Pria -->
+        <div class="groom-card">
+            <div class="photo-frame">
+                <img src="assets/images/groom.png" alt="Foto Deza Azzukhruf">
+            </div>
+            <h1 class="bride-groom-text-mempelai"> Deza <br> Azzukhruf</h1>
+            <p class="parents">
+                Putra dari <br> Pasangan <br> 
+                Bapak Zailani & <br>
+                Ibu Zaipeni
+            </p>
+        </div>
+
+        <!-- Pemisah -->
+        <div class="divider-heart">
+            <i class="fa-solid fa-heart"></i>
+        </div>
+
+        <!-- Mempelai Wanita -->
+        <div class="bride-card">
+            <div class="photo-frame">
+                <img src="assets/images/bride.png" alt="Foto Lara Sagita">
+            </div>
+            <h1 class="bride-groom-text-mempelai">Lara <br> Sagita</h1>
+            <p class="parents">
+                Putri dari <br> Pasangan <br> 
+                Bapak Erman & <br>
+                Ibu Titin
+            </p>
+        </div>
+            <!-- Jam Gadang -->
+            <img class="mempelai-edge-jam-gadang" src="assets/images/jam-gadang.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Semak -->
+            <img class="mempelai-edge-semak-left" src="assets/images/semak.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="mempelai-edge-semak-right" src="assets/images/semak.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="mempelai-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="mempelai-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="mempelai-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="mempelai-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+    </div>
 </section>
 
-  <!-- MAIN CONTENT WRAPPER -->
-  <main id="main-content" class="locked">
+            <!-- Section 3: Kisah Cinta Kami (3 Cards) -->
+            <section id="story" class="section story-section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Kisah Cinta Kami</h2>
+                    <p class="section-subtitle">Perjalanan indah kasih kami hingga bermuara di pelaminan</p>
+                </div>
 
-    <!-- 3. BERANDA -->
-    <section id="beranda" class="section fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
-        <p class="subtitle">The Wedding of</p>
+                <div class="story-cards">
+                    <!-- Card 1 -->
+                    <div class="story-card">
+                        <div class="story-icon"><i class="fa-solid fa-comments"></i></div>
+                        <div class="story-content">
+                            <span class="story-date">15 Februari 2022</span>
+                            <h3 class="story-title">Awal Pertemuan</h3>
+                            <p class="story-text">Berawal dari sebuah tempat kerja yang sama, takdir mempertemukan kami dalam sebuah cerita yang tak pernah kami rencanakan. Saat itu, kami belum tahu bahwa pertemuan sederhana tersebut akan menjadi awal dari perjalanan panjang yang membawa kami hingga hari ini.</p>
+                        </div>
+                    </div>
 
-        <div class="beranda-photo-wrap">
-          <div class="beranda-photo">
-            <img src="assets/images/cover.webp" alt="Deza & Lara">
-            <i class="fa-solid fa-spa beranda-photo-flower"></i>
-          </div>
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-left" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-right" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-left beranda-photo-side-flower-top" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-right beranda-photo-side-flower-bottom" aria-hidden="true">
-        </div>
+                    <!-- Card 2 -->
+                    <div class="story-card">
+                        <div class="story-icon"><i class="fa-solid fa-heart-circle-check"></i></div>
+                        <div class="story-content">
+                            <span class="story-date">01 November 2022</span>
+                            <h3 class="story-title">Memilih Untuk Bersama</h3>
+                            <p class="story-text">Hari demi hari menjadi bagian dari cerita yang kami bangun. Ada tawa, ada perbedaan, ada proses, dan banyak kenangan yang akhirnya membuat kami semakin yakin bahwa perjalanan ini layak untuk diperjuangkan.</p>
+                        </div>
+                    </div>
 
-        <h2 class="title-primary">Deza & Lara</h2>
-        <p class="event-date">Minggu, 01 November 2026</p>
+                    <!-- Card 3 -->
+                    <div class="story-card">
+                        <div class="story-icon"><i class="fa-solid fa-mosque"></i></div>
+                        <div class="story-content">
+                            <span class="story-date">24 Oktober 2026</span>
+                            <h3 class="story-title">Menuju Pelaminan</h3>
+                            <p class="story-text">Dengan memohon ridha Allah SWT, kini tiba waktunya kami melangkahkan kaki bersama menyempurnakan ibadah pernikahan, siap mengarungi bahtera rumah tangga yang sakinah.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="quotes-box">
-          <i class="fa-solid fa-quote-left quote-icon"></i>
-          <p class="quotes-text">
-            "Dan di antara tanda-tanda (kebesaran-Nya) ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
-          </p>
-          <span class="quotes-author">(Q.S. Ar-Rum: 21)</span>
-        </div>
+                            <!-- Rumah Adat -->
+            <img class="story-edge-rumah-adat" src="assets/images/rumah-adat3.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="story-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="story-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="story-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="story-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            </section>
 
-        <!-- Countdown Timer -->
-        <div id="countdown" class="countdown-wrapper">
-          <div class="countdown-item"><span id="days">00</span><small>Hari</small></div>
-          <div class="countdown-item"><span id="hours">00</span><small>Jam</small></div>
-          <div class="countdown-item"><span id="minutes">00</span><small>Menit</small></div>
-          <div class="countdown-item"><span id="seconds">00</span><small>Detik</small></div>
-        </div>
-      </div>
-    </section>
+            <!-- Section 4: Acara -->
+             
+            <section id="acara" class="section acara-section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Rangkaian Acara</h2>
+                    <p class="section-subtitle">Insya Allah acara akan dilaksanakan pada:</p>
+                </div>
 
-    <!-- 4. MEMPELAI -->
-    <section id="mempelai" class="section fade-up-section">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
-        <h2 class="section-title">Pasangan Mempelai</h2>
-        <p class="section-subtitle">Mohon doa restu untuk pernikahan kami</p>
+                <div class="hero-card">
+                    <!-- Countdown Timer -->
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <span id="days">00</span>
+                            <small>Hari</small>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours">00</span>
+                            <small>Jam</small>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes">00</span>
+                            <small>Menit</small>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds">00</span>
+                            <small>Detik</small>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="couple-grid">
-          <!-- Mempelai Pria -->
-          <div class="groom-card">
-            <div class="photo-frame">
-              <img src="assets/images/groom.webp" alt="Deza Azzukhruf">
+                <div class="event-cards">
+                    <!-- Akad -->
+                    <div class="event-card">
+                        <div class="event-icon"><i class="fa-solid fa-ring"></i></div>
+                        <h3 class="event-type">Akad <br> Nikah</h3>
+                        <p class="event-day">Sabtu, 24 Oktober 2026</p>
+                        <p class="event-time"><i class="fa-regular fa-clock"></i> 09.00 - 10.00 WIB</p>
+                        <hr class="event-divider">
+                        <p class="event-venue"><strong>Lara Sagita Shop</strong></p>
+                        <p class="event-address">Lokasi Pesta Pernikahan</p>
+                        <div class="btn-group">
+                            <a href="https://maps.app.goo.gl/RAbzxD3iWuALaXy87" target="_blank" class="btn-primary btn-sm"><i class="fa-solid fa-map-location-dot"></i> Google Maps</a>
+                            <a href="#" id="btn-save-calendar-akad" class="btn-secondary btn-sm"><i class="fa-regular fa-calendar-plus"></i> Simpan Kalender</a>
+                        </div>
+                    </div>
+
+                    <!-- Resepsi -->
+                    <div class="event-card">
+                        <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                        <h3 class="event-type">Resepsi <br>Pernikahan</h3>
+                        <p class="event-day">Minggu, 01 November 2026</p>
+                        <p class="event-time"><i class="fa-regular fa-clock"></i> 10.00 - 17.00 WIB</p>
+                        <hr class="event-divider">
+                        <p class="event-venue"><strong>Zaipeni Tailor</strong></p>
+                        <p class="event-address">Lokasi Pesta Pernikahan</p>
+                        <div class="btn-group">
+                            <a href="https://maps.app.goo.gl/znY3S8dHAEgC9xhS7" target="_blank" class="btn-primary btn-sm"><i class="fa-solid fa-map-location-dot"></i> Google Maps</a>
+                            <a href="#" id="btn-save-calendar-resepsi" class="btn-secondary btn-sm"><i class="fa-regular fa-calendar-plus"></i> Simpan Kalender</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embed Google Maps Provided by User -->
+                <div class="maps-container">
+                    <p class="maps-title text-center" style="font-weight:600; margin-bottom:10px; color: var(--gold);"><i class="fa-solid fa-location-dot"></i> Peta Lokasi Pesta Acara</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3178.945253553638!2d100.41025767377073!3d-0.9545502990362279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b9aedf9b3e79%3A0xb0f91f4224b8f58b!2sZaipeni%20Tailor!5e1!3m2!1sid!2sid!4v1791547849958!5m2!1sid!2sid" width="100%" height="320" style="border:0; border-radius: 12px; box-shadow: var(--shadow-card);" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+
+                            <!-- Rumah Adat -->
+            <img class="acara-edge-rumah-adat" src="assets/images/rumah-adat3.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="acara-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="acara-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="acara-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="acara-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
+            </section>
+
+            <!-- Section 5: Galeri -->
+            <section id="galeri" class="section galeri-section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Galeri Foto</h2>
+                    <p class="section-subtitle">Momen bahagia pernikahan kami</p>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-src="assets/images/gallery1.jpg">
+                        <img src="assets/images/gallery1.jpg" alt="Foto Galeri 1" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%232c3e50;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 1</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                    <div class="gallery-item" data-src="assets/images/gallery2.jpg">
+                        <img src="assets/images/gallery2.jpg" alt="Foto Galeri 2" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%2334495e;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 2</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                    <div class="gallery-item" data-src="assets/images/gallery3.jpg">
+                        <img src="assets/images/gallery3.jpg" alt="Foto Galeri 3" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%231a202c;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 3</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                    <div class="gallery-item" data-src="assets/images/gallery4.jpg">
+                        <img src="assets/images/gallery4.jpg" alt="Foto Galeri 4" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%234a5568;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 4</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                    <div class="gallery-item" data-src="assets/images/gallery5.jpg">
+                        <img src="assets/images/gallery5.jpg" alt="Foto Galeri 5" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%234a5568;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 5</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                    <div class="gallery-item" data-src="assets/images/gallery6.jpg">
+                        <img src="assets/images/gallery6.jpg" alt="Foto Galeri 6" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'400\' style=\'background:%234a5568;\'><text x=\'50%\' y=\'50%\' fill=\'%23ffffff\' font-size=\'18\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Galeri 6</text></svg>'">
+                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                    </div>
+                </div>
+
+            <!-- Jam Gadang -->
+            <img class="galeri-edge-jam-gadang" src="assets/images/jam-gadang.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                        <!-- Semak -->
+            <img class="galeri-edge-semak-left" src="assets/images/semak.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="galeri-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="galeri-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
+            </section>
+
+            <!-- Lightbox Modal -->
+            <div id="lightbox" class="lightbox">
+                <span class="lightbox-close">&times;</span>
+                <img id="lightbox-img" class="lightbox-content" src="" alt="Enlarged photo">
+                <button class="lightbox-prev"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="lightbox-next"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
-            <h3>Deza Azzukhruf</h3>
-            <p class="parents">Putra dari Pasangan <br> 
-              Bapak Zailani & <br>
-              Ibu Zaipeni</p>
-          </div>
 
-          <div class="divider-heart">
-            <i class="fa-solid fa-heart"></i>
-          </div>
+            <!-- Section 6: Wedding Gift -->
+            <section id="gift" class="section gift-section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Hadiah Digital</h2>
+                    <p class="section-subtitle">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda ingin memberi hadiah, kami menyediakan Digital Gift berikut:</p>
+                </div>
 
-          <!-- Mempelai Wanita -->
-          <div class="bride-card">
-            <div class="photo-frame">
-              <img src="assets/images/bride.webp" alt="Lara Sagita">
-            </div>
-            <h3>Lara Sagita</h3>
-            <p class="parents">Putri dari Pasangan <br> 
-              Bapak Erman & <br>
-              Ibu Titin</p>
-          </div>
-        </div>
-      </div>
-    </section>
+                <div class="bank-cards">
+                  <!-- Bank BRI -->
+                    <div class="atm-card bri">
+                        <div class="card-chip"></div>
+                        <div class="bank-logo">BRI</div>
+                        <div class="card-number" id="rekening-bri">0393 0104 1646 509</div>
+                        <div class="card-holder">a.n. Deza Azzukhruf</div>
+                        <button class="btn-copy" onclick="copyToClipboard('039301041646509', this)">
+                            <i class="fa-solid fa-copy"></i> Salin Rekening
+                        </button>
+                    </div>
+                    <!-- Bank BCA -->
+                    <div class="atm-card bca">
+                        <div class="card-chip"></div>
+                        <div class="bank-logo">BCA</div>
+                        <div class="card-number" id="rekening-bca">856 533 4995</div>
+                        <div class="card-holder">a.n. Lara Sagita</div>
+                        <button class="btn-copy" onclick="copyToClipboard('8565334995', this)">
+                            <i class="fa-solid fa-copy"></i> Salin Rekening
+                        </button>
+                    </div>
+                    <!-- E-Wallet -->
+                    <div class="atm-card ewallet">
+                        <div class="card-chip"></div>
+                        <div class="bank-logo">ShopeePay</div>
+                        <div class="card-number" id="rekening-ewallet">0831 8000 9427</div>
+                        <div class="card-holder">a.n. Deza Azzukhruf</div>
+                        <button class="btn-copy" onclick="copyToClipboard('083180009427', this)">
+                            <i class="fa-solid fa-copy"></i> Salin Rekening
+                        </button>
+                    </div>
+                </div>
 
-    <!-- 5. LOVE STORY (Plan A: Timeline) -->
-    <section id="story" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container">
-        <h2 class="section-title text-center">Kisah Cinta Kami</h2>
-        
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">12 Mei 2021</span>
-              <h4>Awal Pertemuan</h4>
-              <p>Kami pertama kali dipertemukan dalam sebuah kegiatan kampus. Dari tegur sapa sederhana, tumbuh komunikasi yang hangat.</p>
-            </div>
-          </div>
+                            <!-- Jam Gadang -->
+            <img class="gift-edge-jam-gadang" src="assets/images/jam-gadang.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+                                    <!-- Semak -->
+            <img class="gift-edge-semak-left" src="assets/images/semak.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="gift-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="gift-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="gift-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="gift-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">15 Agustus 2023</span>
-              <h4>Mengikat Janji (Lamaran)</h4>
-              <p>Setelah menjalin hubungan dan saling mengenal lebih dalam, kami melangsungkan acara lamaran yang dihadiri keluarga tercinta.</p>
-            </div>
-          </div>
 
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">01 November 2026</span>
-              <h4>Menuju Pelaminan</h4>
-              <p>Kini kami siap melangkah ke jenjang pernikahan untuk mengarungi bahtera rumah tangga bersama.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            </section>
 
-    <!-- 6. ACARA -->
-    <section id="acara" class="section fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
-        <h2 class="section-title">Rangkaian Acara</h2>
+            <!-- Section 7: RSVP & Ucapan -->
+            <section id="ucapan" class="section rsvp-section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">RSVP &amp; Ucapan</h2>
+                    <p class="section-subtitle">Konfirmasi kehadiran dan sampaikan doa restu Anda</p>
+                </div>
 
-        <div class="event-grid">
-          <div class="event-card">
-            <h3>Akad Nikah</h3>
-            <p class="event-time"><i class="fa-regular fa-clock"></i> 08.00 WIB - Selesai</p>
-            <p class="event-day"><i class="fa-regular fa-calendar"></i> Minggu, 01 November 2026</p>
-          </div>
+                <!-- Live RSVP Statistics -->
+                <div class="rsvp-stats">
+                    <div class="stat-box">
+                        <span id="stat-hadir" class="stat-num">0</span>
+                        <span class="stat-label">Hadir</span>
+                    </div>
+                    <div class="stat-box">
+                        <span id="stat-tidak" class="stat-num">0</span>
+                        <span class="stat-label">Tidak Hadir</span>
+                    </div>
+                    <div class="stat-box">
+                        <span id="stat-ragu" class="stat-num">0</span>
+                        <span class="stat-label">Ragu-ragu</span>
+                    </div>
+                </div>
 
-          <div class="event-card">
-            <h3>Resepsi</h3>
-            <p class="event-time"><i class="fa-regular fa-clock"></i> 11.00 WIB - Selesai</p>
-            <p class="event-day"><i class="fa-regular fa-calendar"></i> Minggu, 01 November 2026</p>
-          </div>
-        </div>
+                <!-- Form RSVP -->
+                <form id="rsvp-form" class="rsvp-form">
+                    <div class="form-group">
+                        <label for="input-nama">Nama Lengkap</label>
+                        <input type="text" id="input-nama" name="nama" required placeholder="Masukkan nama Anda">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-kehadiran">Konfirmasi Kehadiran</label>
+                        <select id="input-kehadiran" name="kehadiran" required>
+                            <option value="" disabled selected>-- Pilih Kehadiran --</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
+                            <option value="Ragu-ragu">Ragu-ragu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-ucapan">Ucapan &amp; Doa Restu</label>
+                        <textarea id="input-ucapan" name="ucapan" rows="3" required placeholder="Tuliskan pesan & doa untuk kedua mempelai..."></textarea>
+                    </div>
+                    <button type="submit" id="btn-submit-rsvp" class="btn-primary btn-block">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Ucapan
+                    </button>
+                </form>
 
-        <div class="map-wrapper">
-          <h3>Lokasi Acara</h3>
-          <div class="map-embed">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3184.139769464098!2d100.41267659715444!3d-0.9543764923823878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b9aedf9b3e79%3A0xb0f91f4224b8f58b!2sZaipeni%20Tailor!5e1!3m2!1sid!2sid!4v1786942626790!5m2!1sid!2sid" 
-              width="100%" 
-              height="350" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy"
-              referrerpolicy="strict-origin-when-cross-origin">
-            </iframe>
-          </div>
-          <a href="https://maps.app.goo.gl/gZR5Ya4v2KXXpGYb6?g_st=ac" target="_blank" class="btn-primary">
-            <i class="fa-solid fa-location-dot"></i> Buka di Google Maps
-          </a>
-        </div>
-      </div>
-    </section>
+                <!-- Hidden Iframe for Google Apps Script Submit -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-    <!-- 7. GALERI -->
-    <section id="galeri" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
-        <h2 class="section-title">Galeri Foto</h2>
+                <!-- List Ucapan / Wishes Container -->
+                <div class="wishes-container">
+                    <h3 class="wishes-title">Doa &amp; Ucapan Tamu (<span id="wishes-count">0</span>)</h3>
+                    <div id="wishes-list" class="wishes-list">
+                        <!-- Items rendered dynamically via JS -->
+                    </div>
+                    <button id="btn-load-more" class="btn-secondary btn-block hide-btn">Muat Ucapan Lainnya</button>
+                </div>
 
-        <div class="gallery-grid">
-          <div class="gallery-item">
-            <img src="assets/images/gallery1.webp" alt="Foto Galeri 1" class="lightbox-trigger" data-index="0">
-          </div>
-          <div class="gallery-item">
-            <img src="assets/images/gallery2.webp" alt="Foto Galeri 2" class="lightbox-trigger" data-index="1">
-          </div>
-          <div class="gallery-item">
-            <img src="assets/images/gallery3.webp" alt="Foto Galeri 3" class="lightbox-trigger" data-index="2">
-          </div>
-          <div class="gallery-item">
-            <img src="assets/images/gallery4.jpg" alt="Foto Galeri 4" class="lightbox-trigger" data-index="3">
-          </div>
-        </div>
-      </div>
-    </section>
+            <!-- Rumah Adat -->
+            <img class="rsvp-edge-rumah-adat" src="assets/images/rumah-adat3.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <!-- Gambar dekorasi kiri & kanan cover screen -->
+            <img class="rsvp-edge-image left" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="rsvp-edge-image right" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="rsvp-edge-image left2" src="assets/images/kiri.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            <img class="rsvp-edge-image right2" src="assets/images/kanan.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+            </section>
 
-    <!-- LIGHTBOX MODAL -->
-    <div id="lightbox-modal" class="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <button class="lightbox-prev"><i class="fa-solid fa-chevron-left"></i></button>
-      <img class="lightbox-content" id="lightbox-img" src="" alt="Galeri Fullscreen">
-      <button class="lightbox-next"><i class="fa-solid fa-chevron-right"></i></button>
+            <!-- Footer -->
+            <footer class="footer text-center">
+                <p class="footer-title">Lara &amp; Deza</p>
+                <p class="footer-subtitle">Terima Kasih Atas Doa &amp; Restu Anda</p>
+                <small class="credit"> DEDIKASI | Deza Digital Kreasi &copy; 2026 <br>Whatsapp : 0831 8000 9427
+                </small>
+            </footer>
+
+        </main>
     </div>
 
-    <!-- 8. WEDDING GIFT -->
-    <section id="gift" class="section fade-up-section">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
-        <h2 class="section-title">Tanda Kasih</h2>
-        <p class="section-subtitle">Doa restu Anda adalah hadiah terindah. Namun jika ingin memberi hadiah, Anda dapat mengirimkannya melalui:</p>
+    <!-- Background Audio -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="assets/audio/talempong-malam-bainai.mp3" type="audio/mpeg">
+    </audio>
 
-        <div class="atm-grid">
-          <!-- Kartu BRI -->
-          <div class="atm-card bri-card">
-            <div class="atm-chip"></div>
-            <div class="atm-bank">BRI</div>
-            <div class="atm-number">039301041646509</div>
-            <div class="atm-holder">a.n. Deza Azzukhruf</div>
-            <button class="btn-copy" data-account="039301041646509">
-              <i class="fa-regular fa-copy"></i> Salin Rekening
-            </button>
-          </div>
-
-          <!-- Kartu BCA -->
-          <div class="atm-card bca-card">
-            <div class="atm-chip"></div>
-            <div class="atm-bank">BCA</div>
-            <div class="atm-number">8565334995</div>
-            <div class="atm-holder">a.n. Lara Sagita</div>
-            <button class="btn-copy" data-account="8565334995">
-              <i class="fa-regular fa-copy"></i> Salin Rekening
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. RSVP & UCAPAN -->
-    <section id="rsvp" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container">
-        <h2 class="section-title text-center">RSVP & Ucapan</h2>
-
-        <form id="rsvp-form" class="rsvp-form">
-          <div class="form-group">
-            <label for="nama">Nama Lengkap</label>
-            <input type="text" id="nama" name="nama" required placeholder="Masukkan nama Anda">
-          </div>
-
-          <div class="form-group">
-            <label for="kehadiran">Konfirmasi Kehadiran</label>
-            <select id="kehadiran" name="kehadiran" required>
-              <option value="">-- Pilih Kehadiran --</option>
-              <option value="Hadir">Hadir</option>
-              <option value="Masih Ragu">Masih Ragu</option>
-              <option value="Tidak Hadir">Tidak Hadir</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="ucapan">Ucapan & Doa</label>
-            <textarea id="ucapan" name="ucapan" rows="4" required placeholder="Tuliskan ucapan dan doa Anda..."></textarea>
-          </div>
-
-          <button type="submit" id="btn-submit" class="btn-primary btn-block">
-            <i class="fa-solid fa-paper-plane"></i> Kirim Ucapan
-          </button>
-        </form>
-
-        <!-- Daftar Ucapan yang Masuk -->
-        <div class="wishes-container">
-          <h3>Ucapan dari Tamu</h3>
-
-          <div class="rsvp-stats">
-            <div class="rsvp-stat-item">
-              <span id="statTotal">0</span>
-              <small>Total Ucapan</small>
-            </div>
-            <div class="rsvp-stat-item">
-              <span id="statHadir">0</span>
-              <small>Hadir</small>
-            </div>
-            <div class="rsvp-stat-item">
-              <span id="statTidakHadir">0</span>
-              <small>Tidak Hadir</small>
-            </div>
-            <div class="rsvp-stat-item">
-              <span id="statRagu">0</span>
-              <small>Masih Ragu</small>
-            </div>
-          </div>
-
-          <div id="wishes-list" class="wishes-list">
-            <!-- Ucapan akan dimuat di sini -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <p>Thank You</p>
-      <h4><i class="fa-solid fa-spa footer-flower"></i> Deza & Lara <i class="fa-solid fa-spa footer-flower"></i></h4>
-    </footer>
-  </main>
-
-  </div> <!-- Tutup mobile-wrapper -->
-
-  <!-- TOAST NOTIFICATION CONTAINER -->
-  <div id="toast-container"></div>
-
-  <!-- Scripts -->
-  <script src="js/preloader.js"></script>
-  <script src="js/music.js"></script>
-  <script src="js/countdown.js"></script>
-  <script src="js/gallery.js"></script>
-  <script src="js/reservation.js"></script>
-  <script src="js/script.js"></script>
+    <!-- JavaScript Files -->
+    <script src="js/preloader.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/lightbox.js"></script>
+    <script src="js/reservation.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

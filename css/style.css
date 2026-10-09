@@ -1,66 +1,84 @@
-/* ==========================================
-   RESET & VARIABLES
-   ========================================== */
+/* ==========================================================================
+   STYLE.CSS - Main Stylesheet for Digital Wedding Invitation
+   Theme: Elegant Floral Emerald & Champagne Gold
+   ========================================================================== */
+
 :root {
-  --primary: #c2595b;       /* Soft Red utama */
-  --primary-dark: #9e3f41;  /* Soft Red gelap */
-  --primary-light: #f9ecec; /* Background merah pastel soft */
-  --bg-color: #faf8f8;      /* Canvas utama */
-  --text-main: #333333;
-  --text-muted: #666666;
-  --white: #ffffff;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --radius: 12px;
-  --font-title: 'Cinzel', serif;
-  --font-body: 'Poppins', sans-serif;
+    --primary-color: #800000;        /* Maroon */
+    --accent-color: #ff2800;         /* Merah-Oranye */
+    --accent-dark: #cc2000;
+    --text-dark: #2d3748;
+    --text-muted: #718096;
+    --bg-light: #EDE8D0;             /* Krem */
+    --gold : #f3cb51;
+    --card-bg: #ffffff;
+    --white: #ffffff;
+    --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+    --shadow-card: 0 4px 15px rgba(0,0,0,0.05);
+    --border-radius: 16px;
+    --font-heading: 'Playfair Display', serif;
+    --font-script: 'Alex Brush', cursive;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Ukuran kanvas acuan untuk sistem "stage scaling" (dipakai di
+       .cover-content & .hero-stage) — ganti 2 angka ini kalau suatu saat
+       mau pindah HP acuan desain, semua dekorasi otomatis ikut menyesuaikan.
+       Nilai sekarang = ukuran layar HP acuan project ini (≈ iPhone 16 / Oppo A60). */
+    --stage-w: 393;
+    --stage-h: 852;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    font-size: 16px;
+    touch-action: pan-x pan-y;
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: #f5eeee; /* Warna latar belakang luar desktop */
-  color: var(--text-main);
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+    font-family: var(--font-body);
+    background-color: #0f172a;
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    touch-action: pan-x pan-y;
 }
 
-/* Helper Class untuk mengunci scroll saat cover aktif */
 body.no-scroll {
-  overflow: hidden;
+    overflow: hidden !important;
+    height: 100vh;
 }
 
-/* CONTAINER TAMPILAN HP (MOBILE WRAPPER) */
 .mobile-wrapper {
-  max-width: 450px; /* Ukuran standar layar HP */
-  min-height: 100vh;
-  margin: 0 auto;
-  background-color: var(--bg-color);
-  position: relative;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-  overflow-x: hidden;
+    width: 100%;
+    max-width: 450px;
+    min-height: 100svh;
+    background-color: #0f172a;
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    margin: 0 auto;
 }
 
-/* ==========================================
-   PRELOADER
-   ========================================== */
+/* --------------------------------------------------------------------------
+   Preloader
+   -------------------------------------------------------------------------- */
 #preloader {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100dvh;
-  background-color: var(--white);
+  height: 100svh;
+  background-color: var(--primary-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,20 +90,32 @@ body.no-scroll {
   padding: 20px;
 }
 
+.preloader-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  display: block;
+  animation: preloaderSpin 1.8s linear infinite;
+}
+
+@keyframes preloaderSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .loading-text {
-  font-family: var(--font-title);
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: var(--primary);
+  color: var(--gold);
   margin-bottom: 24px;
   animation: pulseText 1.4s ease-in-out infinite;
 }
 
 .browser-notice {
   font-size: 0.85rem;
-  color: var(--text-muted);
-  background: var(--primary-light);
+  color: var(--primary-color);
+  background: var(--gold);
   padding: 8px 16px;
   border-radius: 20px;
   display: inline-flex;
@@ -94,986 +124,1709 @@ body.no-scroll {
 }
 
 .browser-notice i {
-  color: #4285f4;
+  color: var(--primary-color);
 }
 
-/* ==========================================
-   COVER SCREEN
-   ========================================== */
-#cover-screen {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 450px;
-  height: 100vh;
-  z-index: 5000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--white);
+/* --------------------------------------------------------------------------
+   Cover Screen (Lock Screen)
+   -------------------------------------------------------------------------- */
+.cover-screen {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    height: 100svh;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+    color: var(--text-dark);
+    /* background cadangan — tampil di celah atas/bawah kalau rasio
+       layar HP beda dari kanvas acuan 393x852, supaya tetap menyatu
+       dengan warna tema (bukan kelihatan "kotak kosong") */
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+    /* container query: supaya cqw/cqh di .cover-content selalu mengacu
+       ke ukuran RENDER cover-screen sendiri (yang sudah dibatasi
+       max-width 450px di desktop), bukan ke lebar/tinggi layar mentah */
+    container-type: size;
+    container-name: cover-stage;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+}
+
+.cover-screen.opened {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .cover-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+    z-index: -2;
 }
 
+.cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 100%);
+    z-index: -1;
+}
+
+/* STAGE: kanvas desain dikunci di ukuran acuan 393x852 (HP patokan awal
+   proyek ini), lalu seluruh kanvasnya di-scale UTUH (bukan reflow
+   per elemen) supaya proporsi & posisi tiap dekorasi SELALU identik
+   di semua ukuran HP — cuma beda besar-kecil tampilnya saja.
+   z-index DINAIKKAN jadi 8 — di atas .cover-edge-image (z-index 6) —
+   supaya SELURUH isi kanvas ini (termasuk cover-edge-atas & rumah-adat
+   di dalamnya) otomatis di depan motif kiri-kanan. */
 .cover-content {
-  position: relative;
-  z-index: 2;
-  margin-top: 24px;
-  max-width: 600px;
-  padding: 24px;
+    width: calc(var(--stage-w) * 1px);
+    height: calc(var(--stage-h) * 1px);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 24px 40px;
+    position: relative;
+    z-index: 8;
+    transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
-.subtitle {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 16px;
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.cover-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: 6;
+    pointer-events: none;
+}
+.cover-edge-image.left {
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.cover-edge-image.left2 {
+    top: 750px; 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.cover-edge-image.right { 
+    right: -30%;
+}
+.cover-edge-image.right2 { 
+    top: 750px;
+    right: -30%;
 }
 
-#cover-screen .subtitle {
-  margin-bottom: 200px;
+
+.cover-edge-kelapa {
+    position: absolute;
+    top: 60%;
+    right: -60px;
+    height: auto;
+    width: 200px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 10%
 }
 
-.beranda-photo-wrap {
-  position: relative;
-  width: 200px;
-  margin: 0 auto 20px;
+.cover-edge-ranting1 {
+    position: absolute;
+    top: 30%;
+    right: -20px;
+    height: auto;
+    width: 150px;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 10%;
 }
 
-.beranda-photo {
-  width: 200px;
-  height: 300px;
-  margin: 0;
-  border-radius: 100px 100px 20px 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  border: 4px solid var(--white);
-  position: relative;
+
+.cover-edge-pohon1-right {
+    position: absolute;
+    top: 74.1%;
+    right: -10px;
+    height: auto;
+    width: 300px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 20%;
 }
 
-.beranda-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+/* cover-edge-rumah-adat & cover-edge-atas: z-index di bawah ini LOKAL
+   terhadap .cover-content (yang sudah diangkat ke z-index 8) — disamakan
+   nilainya (50) sesuai permintaan "setara", dan ada di bawah cover-oval-text */
+.cover-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    top: 74%;
+    height: auto;
+    width: 440px;
+    object-fit: cover;
+    z-index: 50;
+    pointer-events: none;
 }
 
-.beranda-photo-flower {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.3rem;
-  color: var(--white);
-  opacity: 0.85;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+.cover-edge-jam-gadang {
+    position: absolute;
+    top: 36%;
+    left: -90px;
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 30%;
 }
 
-.beranda-photo-side-flower {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  width: 130px;
-  height: auto;
-  opacity: 0.7;
-  pointer-events: none;
-  overflow: visible;
+.cover-edge-atas {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 120%;
+    object-fit: cover;
+    z-index: 50;
+    pointer-events: none;
 }
 
-.beranda-photo-side-flower-top {
-  top: 70%;
+.sub-title {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
 }
 
-.beranda-photo-side-flower-bottom {
-  top: 70%;
-}
-
-.beranda-photo-side-flower-left {
-  left: -90px;
-}
-
-.beranda-photo-side-flower-right {
-  right: -90px;
-  transform: translateY(-50%) scaleX(-1);
-}
-
-.title-primary {
-  font-family: var(--font-title);
-  font-size: 2.5rem;
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-
-.couple-name {
-  font-family: var(--font-title);
-  font-size: 3rem;
-  margin-bottom: 8px;
-  color: var(--white);
+.bride-groom-title {
+    top: 200;
+    font-family: var(--font-script);
+    font-size: 3.8rem;
+    color: var(--gold);
+    margin: 10px 0;
+    line-height: 1.1;
+    text-shadow: 0 10px 10px rgba(0,0,0,0.35);
 }
 
 .wedding-date {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  font-weight: 300;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+/* Kartu Oval Cover: menaungi judul, nama pasangan, tanggal, guest box & tombol.
+   z-index 150 — di atas cover-edge-atas/rumah-adat (z-index 50 lokal di
+   .cover-content yang sama) — supaya teks & tombol SELALU paling depan. */
+.cover-oval-text {
+    margin-top: 10%;
+    position: relative;
+    z-index: 150;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* padding atas/bawah ekstra supaya teks tidak kena lengkungan oval */
+    padding: 78px 26px 50px;
 }
 
 .guest-box {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  padding: 16px;
-  border-radius: var(--radius);
-  margin-bottom: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--gold);
+    padding: 16px 20px;
+    border-radius: var(--border-radius);
+    height: auto;
+    min-height: 90px;
+    width: 300px;
+    margin: 20px 0;
 }
 
-.guest-box p {
-  font-size: 0.9rem;
+.guest-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.guest-box h3 {
-  font-size: 1.4rem;
-  margin-top: 4px;
-  font-family: var(--font-title);
+.guest-name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+.guest-note {
+    margin-top: 8px;
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
 }
 
 .btn-open {
-  background-color: var(--primary);
-  color: var(--white);
-  border: none;
-  padding: 12px 28px;
-  font-size: 1rem;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(194, 89, 91, 0.4);
-  transition: transform 0.2s, background-color 0.2s;
+    position: relative;
+    z-index: 10;
+    top: 10px;
+    background: var(--primary-color);
+    color: var(--gold);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 40, 0, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-open:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-2px);
+.btn-open:active {
+    transform: scale(0.96);
 }
 
-/* Utility Class untuk menyembunyikan elemen */
-.hidden {
-  display: none !important;
+/* --------------------------------------------------------------------------
+   Floating Separate Music Button Container
+   -------------------------------------------------------------------------- */
+.music-floating-container {
+    position: fixed;
+    bottom: 78px; /* Positioned slightly above the full-width navbar */
+    right: max(15px, calc(50% - 210px)); /* Keeps inside mobile wrapper at right side */
+    z-index: 910;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* ==========================================
-   AUDIO TOGGLE BUTTON (bagian dari side-nav)
-   ========================================== */
-.music-toggle-btn {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background-color: var(--primary);
-  color: var(--white);
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
+.music-floating-container.hide-nav {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}
+
+.music-floating-btn {
+    background: rgba(128, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 40, 0, 0.4);
+    color: var(--accent-color);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s, background 0.3s;
+}
+
+.music-floating-btn:active {
+    transform: scale(0.9);
+}
+
+/* --------------------------------------------------------------------------
+   Floating Navigation
+   -------------------------------------------------------------------------- */
+.floating-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 900;
+    width: 100%;
+    max-width: 450px;
+    padding: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.floating-nav.hide-nav {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 20px);
+}
+
+.nav-pill {
+    background: rgba(128, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 40, 0, 0.3);
+    padding: 10px 4px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-soft);
+    width: 100%;
+}
+
+.nav-item {
+    color: #e8c9c0;
+    font-size: 1rem;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    flex: 1;
+}
+
+.nav-item.active {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.auto-scroll-btn {
+    position: relative; /* anchor untuk .auto-scroll-notice */
+    color: var(--accent-color);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding-right: 8px;
+}
+
+.auto-scroll-notice {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    display: none;
+    pointer-events: none;
+}
+
+.auto-scroll-notice.show {
+    display: block;
+}
+
+.auto-scroll-btn.scrolling {
+    color: #22c55e;
+}
+
+.main-content {
+    /* padding-bottom dipindah ke .rsvp-section (lihat di bawah) supaya
+       ruang ekstra untuk floating-nav ada SEBELUM footer, bukan sesudahnya
+       — sebelumnya ini bikin celah navy kelihatan di bawah footer */
+}
+
+.foto-utama {
+  position: relative;
+  z-index: 150;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0;
-  flex-shrink: 0;
+  width: 100%;
 }
 
-/* ==========================================
-   FLOATING SIDE NAVIGATION
-   ========================================== */
-.side-nav {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
-  bottom: 24px;
-  z-index: 4000;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  padding: 12px 8px;
-  border-radius: 30px;
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(194, 89, 91, 0.15);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 14px;
+.foto-utama .photo-frame {
+    top: -50px;
+    width: 250px;
+    height: 400px;
+    z-index: 5;
+    /* opacity dihapus — dikendalikan animasi.css (.in-view/.out-view) */
 }
 
-.side-nav .music-toggle-btn {
-  margin-bottom: 2px;
+.bride-groom-text-beranda {
+    margin: -20px 0 10px;
+    font-family: var(--font-script);
+    font-size: 2.3rem;
+    color: var(--gold);
+    line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
 }
 
-.side-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  padding-top: 14px;
-  border-left: 1px solid rgba(194, 89, 91, 0.15);
-}
-
-.side-nav a {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.side-nav a:hover,
-.side-nav a.active {
-  background-color: var(--primary);
-  color: var(--white);
-}
-
-/* ==========================================
-   MAIN LAYOUT & SECTIONS
-   ========================================== */
 .section {
-  padding: 80px 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  position: relative;
+    padding: 50px 20px;
+    position: relative;
+    z-index: 0;
+    color: var(--white);
+    /* opacity dihapus — background section selalu solid,
+       animasi reveal ditangani elemen di dalamnya (lihat animasi.css);
+       z-index:0 membuat section jadi stacking context sendiri, supaya
+       gambar dekorasi ber-z-index negatif di dalamnya tidak "bocor"
+       ke section lain */
 }
 
-.container {
-  position: relative;
-  z-index: 1;
+/* Catatan: section TIDAK lagi diberi class .in-view lewat JS — animasi
+   sekarang dipicu per GRUP elemen (.quran-quote, .couple-grid, .story-cards,
+   dst, masing-masing dapat .in-view sendiri saat dirinya masuk viewport),
+   lihat animationObserver di script.js. Blok .section.in-view di bawah ini
+   sengaja dikosongkan/tidak dipakai lagi, aman dihapus kalau mau. */
+.section.in-view {
 }
 
-.section-side-flower {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 150px;
-  height: auto;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
+/* ==========================================================================
+   WARNA BACKGROUND PER SECTION
+   Edit "background" di masing-masing blok di bawah untuk ganti warna
+   section itu SENDIRI, tidak akan memengaruhi section lain.
+   Format: linear-gradient(sudut, warna-atas, warna-tengah, warna-bawah)
+   ========================================================================== */
+
+/* Beranda / Cover (foto utama) */
+.hero-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
-.section-side-flower-left {
-  left: -10px;
+/* Pasangan Mempelai */
+.mempelai-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
-.section-side-flower-right {
-  right: -10px;
-  transform: translateY(-50%) scaleX(-1);
+/* Kisah Cinta Kami */
+.story-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
-.bg-light {
-  background-color: var(--primary-light);
-  border-radius: var(--radius);
+/* Rangkaian Acara */
+.acara-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+}
+
+/* Galeri Foto */
+.galeri-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+}
+
+/* Hadiah Digital */
+.gift-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+}
+
+/* RSVP & Ucapan */
+.rsvp-section {
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+    padding-bottom: 100px; /* ruang untuk floating-nav, dipindah dari
+                               .main-content supaya footer tetap nempel
+                               tanpa celah navy di bawahnya */
+    overflow: hidden; /* mengurung .rsvp-edge-rumah-adat supaya tidak
+                          pernah bisa "bocor" melewati batas bawah section
+                          ini ke dalam .footer, berapa pun nilai top-nya */
+}
+
+.section-header {
+    margin-bottom: 30px;
 }
 
 .section-title {
-  font-family: var(--font-title);
-  font-size: 2.2rem;
-  color: var(--primary);
-  margin-bottom: 8px;
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 8px;
 }
 
-.section-title::after {
-  content: "\f5bb"; /* fa-spa */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  display: block;
-  font-size: 0.85rem;
-  color: var(--primary);
-  opacity: 0.55;
-  margin-top: 10px;
+.section-title-script {
+    font-family: var(--font-script);
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
 }
 
 .section-subtitle {
-  color: var(--text-muted);
-  margin-bottom: 36px;
-  font-size: 0.95rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
 }
 
-.text-center {
-  text-align: center;
+.text-center { text-align: center; }
+
+/* Hero Section - Full Screen Cover Photo */
+.hero-section {
+    position: relative;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    /* container query: cqw/cqh di .hero-stage mengacu ke ukuran render
+       section ini sendiri, bukan lebar/tinggi layar mentah.
+       container-type:size butuh tinggi PASTI, bukan min-height — karena
+       isi section ini sekarang selalu dikunci di dalam .hero-stage
+       (393x852 yang di-scale), section ini aman dipasang height tetap
+       tanpa risiko foto/teks kepotong. */
+    container-type: size;
+    container-name: hero-stage;
 }
 
-/* ==========================================
-   BERANDA & COUNTDOWN
-   ========================================== */
-.quotes-box {
-  margin: 36px auto;
-  max-width: 650px;
-  background: var(--white);
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  position: relative;
+/* STAGE: sama persis prinsipnya dengan .cover-content — kanvas tetap
+   393x852 yang di-scale utuh, supaya posisi menara jam, motif, foto,
+   dan teks nama SELALU identik proporsinya di semua ukuran HP.
+   z-index DINAIKKAN jadi 8 — di atas .beranda-edge-image (z-index 6) —
+   supaya beranda-edge-atas & rumah-adat di dalamnya otomatis di depan
+   motif kiri-kanan. */
+.hero-stage {
+    width: calc(var(--stage-w) * 1px);
+    height: calc(var(--stage-h) * 1px);
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 24px 50px;
+    z-index: 8;
+    transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
-.quote-icon {
-  font-size: 1.8rem;
-  color: var(--primary-light);
-  margin-bottom: 12px;
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('assets/images/cover.png') center/cover no-repeat;
+    background-color: var(--primary-color);
+    z-index: -2;
 }
 
-.quotes-text {
-  font-style: italic;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-  color: var(--text-main);
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 65%, rgba(15,23,42,0.92) 100%);
+    z-index: -1;
 }
 
-.quotes-author {
-  font-weight: 600;
-  color: var(--primary);
-  font-size: 0.85rem;
+/* --------------------------------------------------------------------------
+   Dekorasi khusus Beranda (#beranda / .hero-stage) — DIPISAH dari
+   cover-edge-* milik layar Cover, supaya bisa diatur sendiri-sendiri
+   tanpa saling memengaruhi.
+   z-index di bawah ini LOKAL terhadap .hero-stage (sudah diangkat ke
+   z-index 8): beranda-edge-atas & rumah-adat disamakan (50), dan
+   foto-utama (z-index 150, lihat di atas) ada paling depan dari semua.
+   -------------------------------------------------------------------------- */
+.beranda-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: 6;
+    pointer-events: none;
+}
+.beranda-edge-image.left {
+    left: -30%;
+    transform: scaleX(-1);
+}
+.beranda-edge-image.right {
+    right: -30%;
+}
+.beranda-edge-image.left2 {
+    top: 94%;
+    left: -30%;
+    transform: scaleX(-1);
+}
+.beranda-edge-image.right2 {
+    top: 94%;
+    right: -30%;
 }
 
-.countdown-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
+.beranda-edge-kelapa {
+    position: absolute;
+    top: 60%;
+    right: -60px;
+    height: auto;
+    width: 200px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 10%;
+}
+
+.beranda-edge-ranting1 {
+    position: absolute;
+    top: 30%;
+    right: -20px;
+    height: auto;
+    width: 150px;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 10%;
+}
+
+.beranda-edge-pohon1-right {
+    position: absolute;
+    top: 74.1%;
+    right: -10px;
+    height: auto;
+    width: 300px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+.beranda-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    top: 81%;
+    height: auto;
+    width: 440px;
+    object-fit: cover;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.beranda-edge-jam-gadang {
+    position: absolute;
+    top: 36%;
+    left: -90px;
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 30%;
+}
+
+.beranda-edge-atas {
+    position: absolute;
+    top: -10%;
+    height: auto;
+    width: 150%;
+    object-fit: cover;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.hero-card {
+    width: 100%;
+    color: var(--white);
+    margin-bottom: 28px; /* jarak antara kartu countdown dan kartu Akad/Resepsi di bawahnya */
+}
+
+.hero-card .section-title-script {
+    color: var(--white);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+}
+
+.hero-card .date-badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.scroll-cue {
+    margin-top: 22px;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.1rem;
+    animation: float 2.4s ease-in-out infinite;
+}
+
+.date-badge {
+    display: inline-block;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin: 15px 0 25px;
+}
+
+/* Countdown */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .countdown-item {
-  background: var(--white);
-  padding: 16px;
-  min-width: 75px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(194, 89, 91, 0.1);
+    background: var(--white);
+    box-shadow: var(--shadow-card);
+    border-radius: 14px;
+    flex: 1 1 0;
+    max-width: 80px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(128, 0, 0, 0.25);
+    border-left: 4px solid var(--accent-color);
 }
 
 .countdown-item span {
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--primary);
-  font-family: var(--font-title);
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
 }
 
 .countdown-item small {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
 }
 
-/* ==========================================
-   MEMPELAI
-   ========================================== */
+/* Mempelai */
+
+.bride-groom-text-mempelai {
+    font-family: var(--font-script);
+    font-size: 2.3rem;
+    color: var(--gold);
+    margin: 10px 0;
+    line-height: 1.1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+}
+
+.parents-mempelai {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mempelai-edge-jam-gadang {
+    position: absolute;
+    top: -5%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 30%;
+}
+
+.mempelai-edge-semak-left {
+    position: absolute;
+    top: 80%;
+    left: -80px;
+    width: 230px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+.mempelai-edge-semak-right {
+    position: absolute;
+    top: 80%;
+    right: -90px;
+    width: 230px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.mempelai-edge-image {
+    position: absolute;
+    top: -130%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.mempelai-edge-image.left { 
+    left: -35%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right { 
+    right: -35%;
+}
+.mempelai-edge-image.left2 { 
+    top: 24%;
+    left: -35%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right2 { 
+    top: 24%;
+    right: -35%;
+}
+
+.quran-quote {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
+    margin-bottom: 40px;
+    z-index: 20; /* dinaikkan di atas .couple-grid (z-index:10) — sebelumnya
+                    seri, dan .couple-grid menang karena posisinya lebih
+                    akhir di HTML, jadi dekorasi kiri-kanannya (yang digeser
+                    naik lewat top negatif) menimpa kartu ini */
+}
+
+.quote-icon {
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.ar-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    direction: rtl;
+}
+
+.quote-translation {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.quote-source {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-dark);
+}
+
 .couple-grid {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* sebelumnya "center" — bikin kartu groom/bride
+                              ke-tengah relatif satu sama lain, jadi kelihatan
+                              miring saat panjang teks nama/orang tua beda */
   justify-content: center;
-  gap: 40px;
+  gap: 16px;
   margin-top: 32px;
+  position: relative;
+  z-index: 10;
 }
 
 .groom-card, .bride-card {
-  width: 100%;
-  max-width: 300px;
+  position: relative;
+  z-index: 5; /* eksplisit, supaya menang di atas dekorasi mempelai-edge-*
+                 (z-index 1–2) walau .groom-card/.bride-card kini punya
+                 stacking context sendiri karena animasi transform di
+                 animasi.css — sama pola perbaikan dengan .quran-quote */
+  flex: 1 1 0;
   min-width: 0;
+  max-width: 170px;
+  height: auto;
 }
 
 .photo-frame {
   width: 100%;
-  height: 300px;
-  border-radius: 160px 160px 20px 20px;
+  height: 250%;
+  border-radius: 150px 150px 30px 30px;
   overflow: hidden;
   margin-bottom: 16px;
   box-shadow: var(--shadow);
-  border: 4px solid var(--white);
+  border: 4px solid var(--primary-color);
+  background-color: var(--bg-light);
+  position: relative;
+  z-index: 5;
 }
 
 .photo-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .couple-grid h3 {
   font-family: var(--font-title);
   font-size: 1.5rem;
-  color: var(--primary);
+  color: var(--gold);
   margin-bottom: 4px;
 }
 
 .parents {
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .divider-heart {
   font-size: 2rem;
-  color: var(--primary);
+  color: var(--gold);
+  align-self: center; /* couple-grid sekarang flex-start, ini menjaga
+                          ikon hati tetap di tengah vertikal relatif
+                          terhadap kartu groom/bride di sampingnya.
+                          Geser lebih presisi dengan margin-top bila perlu. */
 }
 
-#mempelai .section-side-flower-left {
-  top: 65%;
+/* --------------------------------------------------------------------------
+   Kisah Cinta Kami Section (3 Cards Style)
+   -------------------------------------------------------------------------- */
+
+.story-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    top: 77%;
+    height: auto;
+    width: 450px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
 }
 
-#mempelai .section-side-flower-right {
-  top: 65%;
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.story-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.story-edge-image.left { 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.story-edge-image.right { 
+    right: -30%;
+}
+.story-edge-image.left2 { 
+    top: 70%;
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.story-edge-image.right2 { 
+    top: 70%;
+    right: -30%;
 }
 
-/* ==========================================
-   LOVE STORY (TIMELINE)
-   ========================================== */
-.timeline {
-  position: relative;
-  max-width: 700px;
-  margin: 40px auto 0;
-  padding-left: 20px;
-  border-left: 2px solid var(--primary);
+.story-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
 }
 
-.timeline-item {
-  position: relative;
-  margin-bottom: 32px;
-  padding-left: 24px;
+.story-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.timeline-dot {
-  position: absolute;
-  left: -33px;
-  top: 2px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: var(--white);
-  border: 2px solid var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.story-icon {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    background: rgba(255, 40, 0, 0.15);
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.timeline-dot::before {
-  content: "\f5bb"; /* fa-spa */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  font-size: 0.6rem;
-  color: var(--primary);
+.story-content {
+    flex: 1;
 }
 
-.timeline-content {
-  background: var(--white);
-  padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+.story-date {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.timeline-date {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--primary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.story-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin: 4px 0 8px;
 }
 
-.timeline-content h4 {
-  font-family: var(--font-title);
-  margin: 6px 0;
-  color: var(--text-main);
+.story-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
 
-.timeline-content p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+/* Acara Section */
+
+.acara-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    top: 77%;
+    height: auto;
+    width: 450px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
 }
 
-#story .section-side-flower-left {
-  top: 20%;
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.acara-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.acara-edge-image.left { 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right { 
+    right: -30%;
+}
+.acara-edge-image.left2 { 
+    top: 70%;
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right2 { 
+    top: 70%;
+    right: -30%;
 }
 
-#story .section-side-flower-right {
-  top: 20%;
-}
-
-/* ==========================================
-   RANGKAIAN ACARA & MAP
-   ========================================== */
-.event-grid {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  margin-bottom: 40px;
+.event-cards {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
 .event-card {
-  flex: 1;
-  max-width: 380px;
-  background: var(--white);
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border-top: 4px solid var(--primary);
+    flex: 1 1 0;
+    min-width: 0;
+    background: var(--white);
+    padding: 16px 12px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(128, 0, 0, 0.2);
+    border-left: 4px solid var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.event-card h3 {
-  font-family: var(--font-title);
-  color: var(--primary);
-  font-size: 1.4rem;
-  margin-bottom: 12px;
+.event-icon {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-bottom: 6px;
 }
 
-.event-time, .event-day {
-  color: var(--text-muted);
-  margin-bottom: 8px;
-  font-size: 0.95rem;
+.event-type {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    line-height: 1.2;
 }
 
-.map-wrapper {
-  margin-top: 32px;
+.event-day {
+    font-weight: 600;
+    font-size: 0.72rem;
+    color: var(--text-dark);
 }
 
-.map-wrapper h3 {
-  font-family: var(--font-title);
-  margin-bottom: 16px;
+.event-time {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
 }
 
-.map-embed {
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
+.event-divider {
+    border: none;
+    border-top: 1px dashed #e2e8f0;
+    margin: 12px 0;
+}
+
+.event-venue { font-size: 0.72rem; color: var(--text-dark); }
+.event-address { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 12px; }
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 .btn-primary {
-  display: inline-block;
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 10px 24px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-primary:hover {
-  background-color: var(--primary-dark);
+.btn-secondary {
+    background: var(--primary-color);
+    color: var(--white);
+    border: 1px solid var(--primary-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
 
-#acara .section-side-flower-left {
-  top: 13%;
+.btn-primary:active,
+.btn-secondary:active,
+.btn-copy:active {
+    transform: scale(0.96);
 }
 
-#acara .section-side-flower-right {
-  top: 13%;
+@media (hover: hover) {
+    .btn-primary:hover {
+        box-shadow: 0 6px 16px rgba(128, 0, 0, 0.3);
+        transform: translateY(-1px);
+    }
+    .btn-secondary:hover {
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
+        transform: translateY(-1px);
+    }
 }
 
-/* ==========================================
-   GALERI & LIGHTBOX
-   ========================================== */
+.btn-sm {
+    padding: 7px 8px;
+    font-size: 0.65rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* Galeri Section */
+
+.galeri-edge-jam-gadang {
+    position: absolute;
+    top: 25px;
+    right: -120px;
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 30%;
+}
+
+.galeri-edge-semak-left {
+    position: absolute;
+    top: 420px;
+    right: 300px;
+    height: auto;
+    width: 230px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 30%;
+}
+
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.galeri-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.galeri-edge-image.left { 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.galeri-edge-image.right { 
+    right: -30%;
+}
+.galeri-edge-image.left2 { 
+    top: 68.5%;
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.galeri-edge-image.right2 { 
+    top: 68.5%;
+    right: -30%;
+}
+
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
 }
 
 .gallery-item {
-  border-radius: var(--radius);
-  overflow: hidden;
-  height: 240px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 160px;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
 }
 
 .gallery-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
 }
 
 .gallery-item:hover img {
-  transform: scale(1.05);
+    transform: scale(1.08);
 }
 
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Lightbox */
 .lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 6000;
-  display: none;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100svh;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .lightbox-content {
-  max-width: 85%;
-  max-height: 80vh;
-  border-radius: 8px;
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
 }
 
 .lightbox-close {
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  color: var(--white);
-  font-size: 2.5rem;
-  cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
 }
 
 .lightbox-prev, .lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--white);
-  border: none;
-  padding: 12px 16px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.lightbox-prev { left: 24px; }
-.lightbox-next { right: 24px; }
+.lightbox-prev { left: 15px; }
+.lightbox-next { right: 15px; }
 
-#galeri .section-side-flower-left {
-  top: 55%;
+/* Gift Section */
+
+.gift-edge-jam-gadang {
+    position: absolute;
+    top: 40%;
+    left: -120px;
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 30%;
 }
 
-#galeri .section-side-flower-right {
-  top: 55%;
+.gift-edge-semak-left {
+    position: absolute;
+    top: 520px;
+    right: -70px;
+    height: auto;
+    width: 230px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 30%;
 }
 
-/* ==========================================
-   WEDDING GIFT (KARTU ATM)
-   ========================================== */
-.atm-grid {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 32px;
-  flex-wrap: wrap;
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.gift-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.gift-edge-image.left { 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.gift-edge-image.right { 
+    right: -30%;
+}
+.gift-edge-image.left2 { 
+    top: 25%;
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.gift-edge-image.right2 { 
+    top: 25%;
+    right: -30%;
+}
+
+.bank-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .atm-card {
-  width: 320px;
-  height: 190px;
-  border-radius: 16px;
-  padding: 20px;
-  color: var(--white);
-  position: relative;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: left;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: var(--white);
+    padding: 20px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: var(--shadow-soft);
 }
 
-.bri-card {
-  background: linear-gradient(135deg, #00529c, #002d57);
+.atm-card.bca { background: linear-gradient(135deg, #00529c 0%, #002f5a 100%); }
+.atm-card.mandiri { background: linear-gradient(135deg, #003366 0%, #001a33 100%); }
+
+.card-chip {
+    width: 38px;
+    height: 28px;
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    border-radius: 6px;
+    margin-bottom: 15px;
 }
 
-.bca-card {
-  background: linear-gradient(135deg, #0060af, #003663);
+.bank-logo {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--white);
 }
 
-.atm-chip {
-  width: 40px;
-  height: 28px;
-  background: linear-gradient(135deg, #ffe082, #ffb300);
-  border-radius: 4px;
+.card-number {
+    font-family: monospace;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
 }
 
-.atm-bank {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-}
-
-.atm-number {
-  font-family: monospace;
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-}
-
-.atm-holder {
-  font-size: 0.85rem;
-  text-transform: uppercase;
+.card-holder {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+    margin-bottom: 15px;
 }
 
 .btn-copy {
-  align-self: flex-end;
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 6px 14px;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.btn-copy:hover {
-  background: rgba(255, 255, 255, 0.35);
+/* RSVP Section */
+.rsvp-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
-.btn-copy:active {
-  transform: scale(0.96);
+.stat-box {
+    flex: 1;
+    background: var(--white);
+    padding: 12px 12px 12px 14px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
 }
 
-.btn-copy.copied {
-  background: var(--white);
-  color: var(--primary);
-  border-color: var(--white);
+.stat-num {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-#gift .section-side-flower-left {
-  top: 35%;
+.stat-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
 }
 
-#gift .section-side-flower-right {
-  top: 35%;
-}
-
-/* ==========================================
-   RSVP & UCAPAN
-   ========================================== */
 .rsvp-form {
-  background: var(--white);
-  padding: 28px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  max-width: 600px;
-  margin: 0 auto 40px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
+    margin-bottom: 30px;
 }
 
 .form-group {
-  margin-bottom: 20px;
-  text-align: left;
+    margin-bottom: 15px;
 }
 
 .form-group label {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  font-weight: 500;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-}
-
-.btn-block {
-  width: 100%;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 40, 0, 0.25);
 }
 
 .wishes-container {
-  max-width: 600px;
-  margin: 0 auto;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
 }
 
-.wishes-container h3 {
-  font-family: var(--font-title);
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-.rsvp-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.rsvp-stat-item {
-  background: var(--white);
-  border: 1px solid rgba(194, 89, 91, 0.15);
-  border-radius: var(--radius);
-  padding: 10px 4px;
-  text-align: center;
-}
-
-.rsvp-stat-item span {
-  display: block;
-  font-family: var(--font-title);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.rsvp-stat-item small {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.wishes-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 8px;
 }
 
 .wishes-list {
-  max-height: 300px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding-right: 6px;
-}
-
-.wish-item {
-  background: var(--white);
-  padding: 14px 18px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  text-align: left;
-}
-
-.wish-time {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.7rem;
-  color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 15px;
 }
 
 .wish-empty {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  padding: 24px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 12px 0;
 }
 
-.wish-load-more {
-  display: block;
-  width: 100%;
-  margin-top: 4px;
-  padding: 10px;
-  background: var(--white);
-  border: 1px dashed rgba(194, 89, 91, 0.4);
-  border-radius: 8px;
-  color: var(--primary);
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.wish-load-more:hover {
-  background: rgba(194, 89, 91, 0.06);
+.wish-item {
+    background: var(--bg-light);
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    border-left: 3px solid var(--accent-color);
 }
 
 .wish-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
 }
 
 .wish-name {
-  font-weight: 600;
-  color: var(--primary);
-  font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-.wish-badge {
-  font-size: 0.75rem;
-  padding: 2px 8px;
-  border-radius: 10px;
-  background: #e8f5e9;
-  color: #2e7d32;
+.badge-status {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
 }
 
-.wish-badge.tidak-hadir {
-  background: #ffebee;
-  color: #c62828;
+.badge-hadir { background: #d1fae5; color: #065f46; }
+.badge-tidak { background: #fee2e2; color: #991b1b; }
+.badge-ragu { background: #fef3c7; color: #92400e; }
+
+.wish-time {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
 }
 
 .wish-text {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+    color: var(--text-dark);
+    line-height: 1.4;
 }
 
-#rsvp .section-side-flower-left {
-  top: 12%;
+.hide-btn { display: none; }
+
+@media (hover: hover) {
+    .bride-groom-card:hover,
+    .story-card:hover,
+    .event-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-soft);
+    }
 }
 
-#rsvp .section-side-flower-right {
-  top: 12%;
+.rsvp-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    top: 80%;
+    height: auto;
+    width: 440px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
 }
 
-/* ==========================================
-   TOAST NOTIFICATION & FOOTER
-   ========================================== */
-#toast-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 7000;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.rsvp-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
 }
-
-.toast {
-  background: #333;
-  color: var(--white);
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  box-shadow: var(--shadow);
-  animation: slideInRight 0.3s forwards, fadeOut 0.3s 2.7s forwards;
+.rsvp-edge-image.left { 
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right { 
+    right: -30%;
+}
+.rsvp-edge-image.left2 { 
+    top:65%;
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right2 { 
+    top: 65%;
+    right: -30%;
 }
 
 .footer {
-  text-align: center;
-  padding: 40px 20px 110px;
-  background: var(--white);
-  border-top: 1px solid #eee;
+    padding: 60px 20px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
 }
 
-.footer p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
+.footer-title {
+    margin-top: -30px;
+    font-family: var(--font-script);
+    font-size: 2.2rem;
+    color: var(--accent-color);
 }
 
-.footer h4 {
-  font-family: var(--font-title);
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--primary);
-  margin-top: 8px;
+.footer-subtitle {
+    font-size: 0.8rem;
+    margin: 6px 0 12px;
+    color: #cbd5e1;
 }
 
-.footer-flower {
-  font-size: 0.9rem;
-  opacity: 0.5;
-  vertical-align: middle;
-  margin: 0 4px;
+.credit {
+    font-size: 0.7rem;
+    color: #94a3b8;
 }

@@ -1,48 +1,58 @@
-/* ==========================================
-   MUSIC PLAYER SCRIPT
-   ========================================== */
-const bgMusic = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-btn');
-let isPlaying = false;
+/**
+ * MUSIC.JS - Controls background audio play / pause & button state
+ */
+const MusicController = {
+    audio: null,
+    btn: null,
+    isPlaying: false,
 
-// Fungsi untuk memutar musik
-function playAudio() {
-  if (bgMusic) {
-    bgMusic.play().then(() => {
-      isPlaying = true;
-      if (musicBtn) {
-        musicBtn.innerHTML = '<i class="fa-solid fa-compact-disc fa-spin"></i>';
-      }
-    }).catch(error => {
-      // Autoplay diblokir browser: tombol tetap tampil (statis, tidak muter)
-      // agar tamu bisa menekannya sendiri untuk memutar musik secara manual.
-      console.log("Autoplay diblokir oleh browser:", error);
-      isPlaying = false;
-      if (musicBtn) {
-        musicBtn.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
-      }
-    });
-  }
-}
+    init: function() {
+        this.audio = document.getElementById('bg-music');
+        this.btn = document.getElementById('music-toggle');
 
-// Fungsi untuk menjeda musik
-function pauseAudio() {
-  if (bgMusic) {
-    bgMusic.pause();
-    isPlaying = false;
-    if (musicBtn) {
-      musicBtn.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
+        if (this.btn && this.audio) {
+            this.btn.addEventListener('click', () => this.toggle());
+        }
+    },
+
+    play: function() {
+        if (!this.audio) return;
+        this.audio.play().then(() => {
+            this.isPlaying = true;
+            this.updateIcon();
+        }).catch((err) => {
+            console.log("Autoplay prevented or audio file missing: ", err);
+            this.isPlaying = false;
+            this.updateIcon();
+        });
+    },
+
+    pause: function() {
+        if (!this.audio) return;
+        this.audio.pause();
+        this.isPlaying = false;
+        this.updateIcon();
+    },
+
+    toggle: function() {
+        if (this.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+        }
+    },
+
+    updateIcon: function() {
+        if (!this.btn) return;
+        const icon = this.btn.querySelector('i');
+        if (this.isPlaying) {
+            icon.classList.add('fa-spin-music');
+            this.btn.style.color = '#c5a880';
+        } else {
+            icon.classList.remove('fa-spin-music');
+            this.btn.style.color = '#a0aec0';
+        }
     }
-  }
-}
+};
 
-// Toggle Play/Pause via Tombol Mengambang
-if (musicBtn) {
-  musicBtn.addEventListener('click', () => {
-    if (isPlaying) {
-      pauseAudio();
-    } else {
-      playAudio();
-    }
-  });
-}
+document.addEventListener('DOMContentLoaded', () => MusicController.init());
